@@ -111,7 +111,7 @@
           </div> 
 
           <div class="col-md-5">
-            <a href="#">
+            <a href="{{route('RegisPasien')}}">
               <div class="card card-csa">
                 <h3>Pendaftaran Pasien</h3> 
                 <p>Halaman untuk pendaftaran pasien</p>

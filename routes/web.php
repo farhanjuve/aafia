@@ -30,5 +30,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/welcome', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('home');
 Route::get('/RegisPasien', [App\Http\Controllers\HomeController::class, 'RegisPasien'])->name('RegisPasien');
+//Route::get('/RegisTransaksi', [App\Http\Controllers\HomeController::class, 'RegisTransaksi'])->name('RegisTransaksi');

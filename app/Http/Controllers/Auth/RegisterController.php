@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Dokter;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,6 +52,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'kode' => ['required', 'string', 'max:255'],
+            'lp' => ['required', 'string', 'max:2'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             
@@ -65,14 +68,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+		//return var_dump($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'kode' => $data['kode'],
+            'kode' => $data['kode'] ?? "Dokter",
             'lp' => $data['lp'],
-            'alamat' => $data['alamat'],
-            'telp' => $data['telp'],
+            'alamat' => $data['alamat'] ?? null,
+            'telp' => $data['telp'] ?? null,
+            'gigi_umum' => $data['gigi_umum'] ?? null,
         ]);
+		/*
+		Dokter::create([
+			'name' => $data['name'],
+			'ttl' => $data['kota'] ? $data['kota'] . ", " . $data['tanggal'] : null,
+			'lp' => $data['lp'],
+			'alamat' => $data['alamat'] ?? null,
+			'telp' => $data['telp'] ?? null,
+			'umum_gigi' => $data['gigi_umum'] ?? null,
+		]);
+		 route('welcome');*/
     }
 }

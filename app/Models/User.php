@@ -24,6 +24,7 @@ class User extends Authenticatable
         'lp',
         'alamat',
         'telp',
+        'gigi_umum'
     ];
 
     /**

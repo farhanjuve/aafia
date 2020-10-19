@@ -1,11 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-h5.ex1 {
-  margin-top: 45px;
-}
-</style>
+
+	<script type="text/javascript">
+		  // Wait for the DOM to be ready
+		$(function() {
+			$('.aa').select2();
+
+
+		});
+	</script>
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <div class="container-fluid">
 	<div class="animate fadeIn">
         <div class="row justify-content-center" style="margin-top:20px;">
@@ -23,168 +29,50 @@ h5.ex1 {
                     </div>
                 @endif
                 <div class="card">
-                    <div class="card-header">
-                        <a><strong>Pasien</strong><small> Formulir</small></a>
-                    </div>
-                    <div class="card-body">
-                        <form class="form-horizontal" action="#" method="POST">
-                            @csrf
-                            <div class="row register-form">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Nama lengkap*" value="">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="number" class="form-control" placeholder="NIK*" value="">
-                                        </div>
-                                        <div class="form-group">
-											<i>Jenis Kelamin</i>
-                                            <div class="maxl">
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
-                                                    <span> Male </span> 
-                                                </label>
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span>Female </span> 
-                                                </label>
-                                            </div>
-                                        </div>
-										<div class="form-group">
-											<i>Golongan darah</i>
-                                            <div class="maxl">
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
-                                                    <span> A </span> 
-                                                </label>
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span>B </span> 
-                                                </label>
-												<label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
-                                                    <span> AB </span> 
-                                                </label>
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span>O </span> 
-                                                </label>
-												
-                                            </div>
-                                        </div>
-										
-										
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Tempat tanggal lahir *" value="">
-                                        </div>
-										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Berat badan" value="">
-                                        </div>
-										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Tinggi badan" value="">
-                                        </div>
-										
-										
-										<h5 class="ex1">Wali/Keluarga</h5>
-                                        
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="telepon" class="form-control" placeholder="Nomor telepon*" value="">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Pekerjaan*" value="">
-                                        </div>
-										<div class="form-group">
-											<i>Status pernikahan</i>
-                                            <div class="maxl">
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
-                                                    <span> Lajang </span> 
-                                                </label>
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span> Menikah </span> 
-                                                </label>
-												<label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span> Cerai hidup</span> 
-                                                </label>
-												<label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span> Cerai meninggal</span> 
-                                                </label>
-                                            </div>
-                                        </div>
-										<div class="form-group">
-											<i>Agama</i>
-                                            <div class="maxl">
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
-                                                    <span> Islam </span> 
-                                                </label>
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span> Kristen </span> 
-                                                </label>
-												<label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span> Hindu </span> 
-                                                </label>
-												
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Alamat*" value="">
-                                        </div>
-										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Tekanan darah" value="">
-                                        </div>
-										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Suhu badan" value="">
-                                        </div>
-										
-                                    </div>
-                                </div>
-								<div class="row register-form">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Nama Wali/Keluarga*" value="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="number" class="form-control" placeholder="Nomor telepon*" value="">
-                                        </div>
-                                        
-                                        
-                                    </div>
-                                    <div class="col-md-6">    
-										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Status wali/keluarga" value="">
-                                        </div>                                    
-										<div class="form-group">
-											<i>Wali atau keluarga?</i>
-                                            <div class="maxl">
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
-                                                    <span> Wali </span> 
-                                                </label>
-                                                <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span> Keluarga </span> 
-                                                </label>
-												
-                                            </div>
-                                        </div>
-										
-                                        <input type="submit" class="btnRegister" value="Register">
-                                    </div>
-                                </div>
-                        </form>
-                    </div>
+                    <div class="card-header">{{ __('Register') }}</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('Registernew') }}">
+                        @csrf
+
+						<div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Nomor RM</label>
+                            							
+                            <div class="col-md-6">								
+								<select class="js-example-basic-single" id="identitas" name="identitas" style="width: 100%;">
+									<option class="hidden" selected="" disabled="">Nomor Rekam Medis*</option>
+									@foreach($norm as $rmno)
+										<option value="{{$rmno->no_rm}}" {{(request()->input("norm")==$rmno) ? "selected" : ""}}>{{$rmno->no_rm}}</option>
+									@endforeach
+									@foreach($nama_pasien as $nama)
+										<option value="{{$nama->name}}" {{(request()->input("nama_pasien")==$nama) ? "selected" : ""}}>{{$nama->name}}</option>
+									@endforeach
+								</select>
+                                
+                            </div>
+                        </div>
+						
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Pasien') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nama_pasien" type="text" class="form-control" name="nama_pasien" readonly autofocus>
+                            </div>
+                        </div>                        														
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" name="submit" value="Register" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <a href="#filter-asset" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="filter-asset"><strong>Pencarian</strong><small> Pasien</small></a>
+                        <a href="#filter-asset" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="filter-asset"><strong>Pencarian</strong><small> Transaksi</small></a>
                     </div>
                     <div class="card-body collapse" id="filter-asset">
                         <form class="form-horizontal" action="#" method="POST">
@@ -212,25 +100,33 @@ h5.ex1 {
                 </div>
 				<div class="card">
                     <div class="card-header">
-                        <a href="#daftarPasien" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="filter-asset"><strong>Daftar</strong><small> Pasien</small></a>
+                        <a href="#daftarPasien" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="filter-asset"><strong>Daftar</strong><small> Transaksi</small></a>
                     </div>				
                     <div class="card-body collapse" id="daftarPasien" style="overflow-x:auto;">
                         <table class="table table-responsive-sm">
-                            <thead>
-                                <tr>
-                                    <th>No. Rekam Medis</th>
-                                    <th>Nama Pasien</th>
-                                    <th>NIK</th>
-                                    <th>Nomor Telepon</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Alamat</th>
-                                    <th style="text-align:center">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Tanggal</th>
+								<th>No. Rekam Medis</th>
+								<th>Nama Pasien</th>
+								<th>Status</th>
+								<th style="text-align:center">Aksi</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($cek as $data)
+							<tr>
+								<td>{{"1"}}</td>
+								<td>{{\Carbon\Carbon::parse($data->created_at)->format("d M Y")}}</td>
+								<td>{{$data->nomor_rm}}</td>
+								<td>{{$data->nama_pasien}}</td>
+								<td>{{$data->status ? "Mencari dokter" : "Null"}}</td>
+								<td style="text-align:center"><a href="{{ route('TindakanTransaksi') }}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
 
 
                     </div>

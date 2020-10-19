@@ -84,7 +84,7 @@
 								</form>
 							</div>
 							<div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-								<form method="POST" action="{{ route('register') }}">
+								<form method="POST" action="{{ route('daftarDokter') }}">
 								@csrf
 								<h3 class="register-heading">Dokter</h3>
 								<div class="row register-form">

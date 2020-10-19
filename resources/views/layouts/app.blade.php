@@ -10,15 +10,48 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 	<script src="https://kit.fontawesome.com/4f5fb3f187.js" crossorigin="anonymous"></script>
-
-    <!-- Fonts -->
+	 
+	<!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+	
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script type="text/javascript">
+		  // Wait for the DOM to be ready
+		
+		
+		$(function() {
+
+			$('.js-example-basic-single').select2();
+
+		});
+		$(function() {
+			var input = document.getElementById("userinput");
+			var button = document.getElementById("enter");
+			//var ul = document.querySelector("ul");
+			var ul = document.getElementById("list-add");
+			button.addEventListener("click", myFunction);
+			$( "p" ).text( "The DOM is now loaded and can be manipulated." );
+			function myFunction() {
+				
+				var li = document.createElement("li");
+				li.className = 'list-group-item';
+				li.textContent = input.value;
+				ul.appendChild(li);
+				console.log(li);
+				console.log(input.value);
+				document.getElementById(input.value).selected = "true";
+			};
+		});
+		
+	</script>
+	
 </head>
 <body>
     <div id="app">

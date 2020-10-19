@@ -27,25 +27,25 @@ h5.ex1 {
                         <a><strong>Pasien</strong><small> Formulir</small></a>
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal" action="#" method="POST">
+                        <form class="form-horizontal" action="{{route('daftarPasien')}}" method="POST">
                             @csrf
                             <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Nama lengkap*" value="">
+                                            <input id="name" name="name" type="text" class="form-control" placeholder="Nama lengkap*" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="number" class="form-control" placeholder="NIK*" value="">
+                                            <input id="nik" name="nik" type="number" class="form-control" placeholder="NIK*" value="">
                                         </div>
                                         <div class="form-group">
 											<i>Jenis Kelamin</i>
                                             <div class="maxl">
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
+                                                    <input type="radio" name="gender" value="Laki-laki" checked="">
                                                     <span> Male </span> 
                                                 </label>
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
+                                                    <input type="radio" name="gender" value="Perempuan">
                                                     <span>Female </span> 
                                                 </label>
                                             </div>
@@ -54,19 +54,19 @@ h5.ex1 {
 											<i>Golongan darah</i>
                                             <div class="maxl">
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
+                                                    <input type="radio" name="goldar" value="A">
                                                     <span> A </span> 
                                                 </label>
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
+                                                    <input type="radio" name="goldar" value="B">
                                                     <span>B </span> 
                                                 </label>
 												<label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
+                                                    <input type="radio" name="goldar" value="AB">
                                                     <span> AB </span> 
                                                 </label>
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
+                                                    <input type="radio" name="goldar" value="O">
                                                     <span>O </span> 
                                                 </label>
 												
@@ -75,13 +75,13 @@ h5.ex1 {
 										
 										
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Tempat tanggal lahir *" value="">
+                                            <input type="text" class="form-control" placeholder="Tempat tanggal lahir *">
                                         </div>
 										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Berat badan" value="">
+                                            <input id="bb" name="bb" type="number" class="form-control" placeholder="Berat badan">
                                         </div>
 										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Tinggi badan" value="">
+                                            <input id="tb" name="tb" type="number" class="form-control" placeholder="Tinggi badan">
                                         </div>
 										
 										
@@ -93,26 +93,22 @@ h5.ex1 {
                                             <input type="text" minlength="10" maxlength="10" name="telepon" class="form-control" placeholder="Nomor telepon*" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Pekerjaan*" value="">
+                                            <input id="pekerjaan" name="pekerjaan" type="text" class="form-control" placeholder="Pekerjaan*" value="">
                                         </div>
 										<div class="form-group">
 											<i>Status pernikahan</i>
                                             <div class="maxl">
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
+                                                    <input type="radio" name="sts_nikah" value="lajang" checked="">
                                                     <span> Lajang </span> 
                                                 </label>
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
+                                                    <input type="radio" name="sts_nikah" value="menikah">
                                                     <span> Menikah </span> 
                                                 </label>
 												<label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span> Cerai hidup</span> 
-                                                </label>
-												<label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
-                                                    <span> Cerai meninggal</span> 
+                                                    <input type="radio" name="sts_nikah" value="duda/janda">
+                                                    <span> Duda/Janda</span> 
                                                 </label>
                                             </div>
                                         </div>
@@ -120,28 +116,28 @@ h5.ex1 {
 											<i>Agama</i>
                                             <div class="maxl">
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
+                                                    <input type="radio" name="agama" value="islam" checked="">
                                                     <span> Islam </span> 
                                                 </label>
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
+                                                    <input type="radio" name="agama" value="kristen">
                                                     <span> Kristen </span> 
                                                 </label>
 												<label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
+                                                    <input type="radio" name="agama" value="hindu">
                                                     <span> Hindu </span> 
                                                 </label>
 												
                                             </div>
                                         </div>
 										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Alamat*" value="">
+                                            <input id="alamat" name="alamat" type="text" class="form-control" placeholder="Alamat*" value="">
                                         </div>
 										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Tekanan darah" value="">
+                                            <input id="tekanan_darah" name="tekanan_darah" type="text" class="form-control" placeholder="Tekanan darah" value="">
                                         </div>
 										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Suhu badan" value="">
+                                            <input id="suhu" name="suhu" type="number" class="form-control" placeholder="Suhu badan" value="">
                                         </div>
 										
                                     </div>
@@ -149,34 +145,85 @@ h5.ex1 {
 								<div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Nama Wali/Keluarga*" value="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                                            <input id="wali_name" name="wali_name" type="text" class="form-control" placeholder="Nama Wali/Keluarga*" value="" >
                                         </div>
                                         <div class="form-group">
-                                            <input type="number" class="form-control" placeholder="Nomor telepon*" value="">
+                                            <input id="wali_telp" name="wali_telp" type="number" class="form-control" placeholder="Nomor telepon*" value="">
                                         </div>
                                         
-                                        
+                                        <h5 class="ex1">Riwayat Kesehatan</h5>
                                     </div>
                                     <div class="col-md-6">    
 										<div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Status wali/keluarga" value="">
+                                            <input id="sts_kel" name="sts_kel" type="text" class="form-control" placeholder="Status wali/keluarga" value="">
                                         </div>                                    
 										<div class="form-group">
 											<i>Wali atau keluarga?</i>
                                             <div class="maxl">
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="male" checked="">
+                                                    <input type="radio" name="wali_kel" value="wali" checked="">
                                                     <span> Wali </span> 
                                                 </label>
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="gender" value="female">
+                                                    <input type="radio" name="wali_kel" value="keluarga">
                                                     <span> Keluarga </span> 
                                                 </label>
 												
                                             </div>
                                         </div>
 										
-                                        <input type="submit" class="btnRegister" value="Register">
+                                    </div>
+                                </div>
+								<div class="row register-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input id="opname" name="opname" type="text" class="form-control" placeholder="Opname" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="operasi" name="operasi" type="text" class="form-control" placeholder="Operasi" value="">
+                                        </div>
+										<div class="form-group">
+                                            <input id="alergi" name="alergi" type="text" class="form-control" placeholder="Alergi" value="">
+                                        </div>
+										
+                                        <div class="form-group">
+                                            <input id="jantung" name="jantung" type="text" class="form-control" placeholder="Penyakit Jantung" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="diabetes" name="diabetes" type="text" class="form-control" placeholder="Diabetes" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="hemofilia" name="hemofilia" type="text" class="form-control" placeholder="Hemofilia" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="hepatitis" name="hepatitis" type="text" class="form-control" placeholder="Hepatitis" value="">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6">    
+										<div class="form-group">
+                                            <input id="gastring" name="gastring" type="text" class="form-control" placeholder="Gastring" value="">
+                                        </div>
+										
+										<div class="form-group">
+                                            <input id="ginjal" name="ginjal" type="text" class="form-control" placeholder="Penyakit Ginjal" value="">
+                                        </div>
+										<div class="form-group">
+                                            <input id="asma" name="asma" type="text" class="form-control" placeholder="Asma" value="">
+                                        </div>
+										<div class="form-group">
+                                            <input id="tbc" name="tbc" type="text" class="form-control" placeholder="TBC" value="">
+                                        </div>
+										<div class="form-group">
+                                            <input id="rheu" name="rheu" type="text" class="form-control" placeholder="Rheu. Fever" value="">
+                                        </div>
+										<div class="form-group">
+                                            <input id="lainlain" name="lainlain" type="text" class="form-control" placeholder="Lain-lain" value="">
+                                        </div>
+										<div class="form-group">
+                                            <input id="kebiasaan" name="kebiasaan" type="text" class="form-control" placeholder="Kebiasaan buruk" value="">
+                                        </div>																				
+                                        <input type="submit" name="submit" class="btnRegister" value="Register">
                                     </div>
                                 </div>
                         </form>
@@ -228,7 +275,23 @@ h5.ex1 {
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @foreach($pasien as $data)
+								<tr>
+									<td>{{$data->no_rm}}</td>
+									<td>{{$data->name}}</td>
+									<td>{{$data->nik}}</td>
+									<td>{{$data->telp}}</td>
+									<td>{{$data->lp}}</td>
+									<td>{{$data->alamat}}</td>
+									<td style="text-align:center">
+                                    <form class="{{ $data->id }}" action="{{ route('hapus-pasien', $data->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger" onclick="deleteUser({{$data->id}})"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td> 
+								</tr>
+								@endforeach
                             </tbody>
                         </table>
 

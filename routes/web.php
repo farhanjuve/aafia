@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PasienController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +29,20 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('/', [LoginController::class])->name('home');
+Route::post('/RegisDokter', [App\Http\Controllers\Auth\RegisterController::class, 'daftarDokter'])->name('daftarDokter');
+Route::post('/RegisPasien', [PasienController::class, 'daftarPasien'])->name('daftarPasien');
+//Route::get('/RegisPasien', [App\Http\Controllers\PasienController::class, 'daftarPasien'])->name('daftarPasienIndex');
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/welcome', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/welcome', [HomeController::class, 'index'])->name('welcome');
+Route::get('/home', [HomeController::class, 'index']);
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('home');
-Route::get('/RegisPasien', [App\Http\Controllers\HomeController::class, 'RegisPasien'])->name('RegisPasien');
-//Route::get('/RegisTransaksi', [App\Http\Controllers\HomeController::class, 'RegisTransaksi'])->name('RegisTransaksi');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('home');
+Route::get('/RegisPasien', [HomeController::class, 'RegisPasien'])->name('RegisPasien');
+Route::get('/RegisTransaksi', [TransactionController::class, 'index'])->name('RegisTransaksi');
+Route::get('/DokterTransaksi', [TransactionController::class, 'dokter'])->name('DokterTransaksi');
+Route::get('/TindakanTransaksi/', [TransactionController::class, 'tindakan']);
+Route::get('/TindakanTransaksi/{created_at}', [TransactionController::class, 'tindakan_transaksi'])->name('TindakanTransaksi');
+Route::post('/BayarTransaksi', [TransactionController::class, 'bayar'])->name('BayarTransaksi');
+Route::post('/RegisTransaksi', [TransactionController::class, 'index'])->name('Registernew');
+Route::delete('delete/pasien/{id}', [PasienController::class, 'hapusPasien'])->name('hapus-pasien');

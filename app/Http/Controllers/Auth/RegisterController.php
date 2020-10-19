@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -79,15 +80,30 @@ class RegisterController extends Controller
             'telp' => $data['telp'] ?? null,
             'gigi_umum' => $data['gigi_umum'] ?? null,
         ]);
-		/*
-		Dokter::create([
-			'name' => $data['name'],
-			'ttl' => $data['kota'] ? $data['kota'] . ", " . $data['tanggal'] : null,
-			'lp' => $data['lp'],
-			'alamat' => $data['alamat'] ?? null,
-			'telp' => $data['telp'] ?? null,
-			'umum_gigi' => $data['gigi_umum'] ?? null,
-		]);
-		 route('welcome');*/
     }
+	
+	public function daftarDokter(Request $request) {
+		Dokter::create([
+			'name' => $request->name,
+			'ttl' => $request->kota ? $request->kota . ", " . $request->tanggal : null,
+			'lp' => $request->lp,
+			'alamat' => $request->alamat ?? null,
+			'telp' => $request->telp ?? null,
+			'umum_gigi' => $request->gigi_umum ?? null,
+		]);
+		
+		User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'kode' => $data['kode'] ?? "Dokter",
+            'lp' => $request->lp,
+            'alamat' => $request->alamat ?? null,
+            'telp' => $request->telp ?? null,
+            'gigi_umum' => $request->gigi_umum ?? null,
+        ]);
+		
+		//return $request;
+		return redirect()->route('DokterTransaksi');
+	}
 }

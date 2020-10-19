@@ -12,7 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<h1>Halaman Kasir</h1>
+		<h1>Halaman Admin</h1>
         <style>
              
           body{
@@ -103,12 +103,21 @@
           </div>  
 
           <div class="col-md-5 ml-3">
-            <a href="#">
+		  @if($kode == 'dokter')
+			<a href="{{route('DokterTransaksi')}}">
               <div class="card card-ikea">
                 <h3>Transaksi</h3>
                 <p>Halaman dokter untuk membuat nota tindakan</p>
               </div>
             </a> 
+		  @else			  
+            <a href="{{route('RegisTransaksi')}}">
+              <div class="card card-ikea">
+                <h3>Transaksi</h3>
+                <p>Halaman dokter untuk membuat nota tindakan</p>
+              </div>
+            </a> 
+		  @endif
           </div> 
 
           <div class="col-md-5">

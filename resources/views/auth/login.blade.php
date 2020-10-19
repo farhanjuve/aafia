@@ -51,7 +51,8 @@
                 <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
                     <div class="card-body text-center">
                         <div>                            
-                            <h2 style="margin-top:55px;"><b>Klinik Aafia</b></h2>
+							<img style="width:75%;" src="{{ asset('images/logo-white.png')}}" alt="">
+                            <h2 style="margin-top:15px;"><b>Klinik Aafia</b></h2>
                             <h5 style="margin-top:5px;">Kartasura</h5
                         </div>
                     </div>

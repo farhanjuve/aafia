@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -20,6 +22,24 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+	public function authenticated()
+	{
+		$data['user'] = Auth::user();
+		if($data['user']->kode == "Dokter")
+		{
+			return redirect()->route('DokterTransaksi');
+		} 
+		if($data['user']->kode == "kasir")
+		{
+			return redirect()->route('RegisTransaksi');
+		} 
+		if($data['user']->kode == "pendaftaran")
+		{
+			return redirect()->route('RegisPasien');
+		} 
+
+		return redirect()->route('welcome');
+	}
 
     /**
      * Where to redirect users after login.

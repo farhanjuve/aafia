@@ -32,6 +32,7 @@
 
 		});
 		$(function() {
+			var i = 0;
 			var input = document.getElementById("userinput");
 			var button = document.getElementById("enter");
 			//var ul = document.querySelector("ul");
@@ -39,14 +40,18 @@
 			button.addEventListener("click", myFunction);
 			$( "p" ).text( "The DOM is now loaded and can be manipulated." );
 			function myFunction() {
-				
+				i++;
 				var li = document.createElement("li");
+				
 				li.className = 'list-group-item';
 				li.textContent = input.value;
-				ul.appendChild(li);
-				console.log(li);
-				console.log(input.value);
-				document.getElementById(input.value).selected = "true";
+				ul.innerHTML += '<td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" value="'+input.value+'"/></td>';
+				
+				//td.className = 'form-control name_list';
+				//td.textContent = input.value;
+				//<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>'); 
+				//ul.html('<td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" value="'+input.value+'"/>'+input.value+'</td>');
+				//ul.appendChild(li);
 			};
 		});
 		

@@ -8,6 +8,7 @@ use App\Models\Transaction;
 use App\Models\Tindakan;
 use App\Models\Pasien;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -28,7 +29,7 @@ class TransactionController extends Controller
 		$data = array();
 		
 		if($request->submit) {
-			return $request;
+			//return $request;
 			$tindakan = DB::table('tindakan_tbl')->get();
 			$dataPasien = Pasien::where('no_rm', $request->identitas)->orWhere('name', $request->identitas)->first();
 
@@ -36,6 +37,7 @@ class TransactionController extends Controller
 				$newTransaction = new Transaction();
 				
 				$newTransaction->nomor_rm = $dataPasien->no_rm;
+				$newTransaction->nomor_transaksi = Carbon::now()->format('dmy_Hi');
 				$newTransaction->nama_pasien = $dataPasien->name;
 				$newTransaction->tindakan = $value->kode;
 				$newTransaction->status = "mencari_dokter";
@@ -67,10 +69,11 @@ class TransactionController extends Controller
 	public function dokter(){
 		$data = array();
 		$cek = DB::table('transaction_tbl')
-			   ->distinct()
 			   ->orderBy('created_at', 'asc')
-			   ->where('status', "mencari_dokter")
+			   ->where('status', 'mencari_dokter')
 			   ->get();
+			   
+		//$cek = DB::select('SELECT * FROM transaction_tbl GROUP BY created_at');
 		//$cek = Transaction::distinct('created_at')->where('status', "mencari_dokter")->get();
 		//$cek = \App\Models\Transaction::distinct()->select('nomor_rm');
 		
@@ -83,21 +86,26 @@ class TransactionController extends Controller
 	public function tindakan_transaksi($created_at){
 		//return $created_at;
 		$data = array();
-		$cek = Transaction::where('status', "mencari_dokter")
-				->where('created_at', $created_at)
-				->first();
-		$daftarTransaksi = Transaction::where('status', "mencari_dokter")->get();
-		$tindakan = Tindakan::select('deskripsi')->get();
-		$userini = Auth::user();
-		$data['daftarTransaksi'] = $daftarTransaksi;
+		$cek = Transaction::where('created_at', $created_at)
+				->get();
+		//return $cek;
+		foreach($cek as $i => $value){
+			$value->status = "Mendapat_Dokter";
+			$value->save();
+			
+			$daftarTransaksi = Transaction::where('status', "mencari_dokter")->get();
+			$tindakan = Tindakan::select('deskripsi')->get();
+			$userini = Auth::user();
+			$data['daftarTransaksi'] = $daftarTransaksi;
 
-		$data['norm'] = $cek->nomor_rm;
-		$data['poli'] = $cek->poli;
-		$data['tanggal'] = \Carbon\Carbon::now()->toFormattedDateString();
-		$data['tindakan'] = $tindakan;
-		$data['nodaftar'] = $cek->id;
-		$data['nama_pasien'] = $cek->nama_pasien;
-		$data['nama_dokter'] = $userini->name;
+			$data['norm'] = $value->nomor_rm;
+			$data['poli'] = $value->poli;
+			$data['tanggal'] = \Carbon\Carbon::now()->toFormattedDateString();
+			$data['tindakan'] = $tindakan;
+			$data['nodaftar'] = $value->id;
+			$data['nama_pasien'] = $value->nama_pasien;
+			$data['nama_dokter'] = $userini->name;
+		}
 		//$data['tindakan'] = array("mencari_dokter", "bayar" );
 		
 		//return $data['tindakan'];
@@ -106,9 +114,24 @@ class TransactionController extends Controller
 	}
 	
 	public function bayar(Request $request){
+		$data = array();
+		$data['req'] = $request;
+		$data['tindakan'] = $request->name;
+		$data['tanggal'] = $request->tanggal;
+		$data['nama_pasien'] = $request->nama_pasien;
+		$data['poli'] = $request->poli;
+		//$data['poli'] = $request->poli;
+		/*
+		if($request->cancel){
+			$cek = Transaction::where('status', "mencari_dokter")
+				->where('created_at', $created_at)
+				->get();
+		}
+		*/
 		
+		//return $data['tindakan'];
 		return $request;
-		//return view('TransaksiBayar');
+		return view('TransaksiBayar', $data);
 	}
 
 }

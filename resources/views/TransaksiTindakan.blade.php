@@ -63,30 +63,7 @@
                             <div class="col-md-6">
                                 <input id="nama_dokter" type="text" class="form-control" name="nama_dokter" readonly autofocus value="{{$data['nama_dokter'] ?? ''}}">
                             </div>
-                        </div>
-
-						<div class="form-group row">
-                            <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('Tindakan') }}</label>
-                            <div class="col-md-6">						
-								<select class="form-control" id="tindakan" name="tindakan">
-									<option class="hidden" selected="" disabled="">Tindakan *</option>
-										@foreach($data['tindakan'] as $tdk)
-											<option value="{{$tdk}}" {{(request()->input("kode")==$tdk) ? "selected" : ""}}>{{$tdk}}</option>
-										@endforeach
-								</select>
-							</div>
-							<div class="col-md-2">						
-								<select class="form-control" id="jumlah" name="jumlah">
-									<option class="hidden" selected="" disabled="">Jumlah *</option>
-										@foreach(range(1, 10) as $i)
-											<option value="{{$i}}" {{(request()->input("tindakan")==$i) ? "selected" : ""}}>{{$i}}</option>
-										@endforeach
-								</select>
-							</div>
-							<div class="col-md-2">						
-								<input id="nama_dokter" type="text" class="form-control" name="nama_dokter" readonly autofocus value="Rp500.000">
-							</div>
-						</div>								
+                        </div>							
 						
 						<div class="container">
 							<div class="row justify-center">
@@ -103,6 +80,7 @@
 									<div class="col-md-6">
 										<select class="js-example-basic-single" id="userinput" name="tindakan[]" style="width: 100%;">
 											<option class="hidden" selected="" disabled=""> Pilih Tindakan . . .  *</option>
+											<option value="Isi disini"> Isi sendiri . . . </option>
 											@foreach($data['tindakan'] as $tdk)
 												<option id="{{$tdk->deskripsi}}" value="{{$tdk->deskripsi}}" {{(request()->input("deskripsi")==$tdk->deskripsi) ? "selected" : ""}}>{{$tdk->deskripsi}}</option>
 											@endforeach
@@ -118,7 +96,6 @@
 							  </div>
 							  <div class="col-12">
 								<ul id="list-add" name="list-add" class="list-group">
-								  
 								</ul>
 							  </div>
 							</div>
@@ -128,7 +105,7 @@
                             <label for="name" class="col-md-10 col-form-label text-md-right">{{ __('Harga total') }}</label>
 
                             <div class="col-md-2">
-                                <input id="nama_dokter" type="text" class="form-control" name="nama_dokter" readonly autofocus value="Rp1.500.000">
+                                <input readonly autofocus value="Rp1.500.000">
                             </div>
                         </div>
                         <div class="form-group row mb-0">

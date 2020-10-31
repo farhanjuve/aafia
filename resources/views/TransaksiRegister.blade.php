@@ -53,10 +53,16 @@
                         </div>
 						
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Pasien') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Poli') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="nama_pasien" type="text" class="form-control" name="nama_pasien" readonly autofocus>
+                            <div class="col-md-6">								
+								<select class="js-example-basic-single" id="poli" name="poli" style="width: 100%;">
+									<option class="hidden" selected="" disabled="">pilih jenis poli disini*</option>
+									<option value="gigi">Gigi</option>
+									<option value="umum">Umum</option>
+									
+								</select>
+                                
                             </div>
                         </div>                        														
 
@@ -115,14 +121,24 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($cek as $data)
+							@foreach($listTransaksi as $data)
 							<tr>
 								<td>{{"1"}}</td>
 								<td>{{\Carbon\Carbon::parse($data->created_at)->format("d M Y")}}</td>
 								<td>{{$data->nomor_rm}}</td>
 								<td>{{$data->nama_pasien}}</td>
-								<td>{{$data->status ? "Mencari dokter" : "Null"}}</td>
-								<td style="text-align:center"><a href="{{ route('TindakanTransaksi') }}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></td>
+								<td>{{$data->status ? $data->status : "Null"}}</td>
+								@if($data->status == "Menunggu Pembayaran")
+								<td style="text-align:center"><a href="{{ route('BayarBeneran', ['created_at' => $data->created_at]) }}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></td>
+								@else
+								<form class="{{ $data->id }}" action="{{ route('hapus-pasien', $data->id) }}" method="post">
+									@csrf
+									@method('DELETE')
+									<td style="text-align:center">
+										<button type="button" class="btn btn-danger" onclick="deleteUser({{$data->id}})"><i class="fa fa-trash"></i></button>
+									</td>
+								</form>
+								@endif
 							</tr>
 							@endforeach
 						</tbody>

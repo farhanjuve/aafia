@@ -1052,16 +1052,16 @@ label.arrowed,
 				<div class="widget-header widget-header-large">
 					<h3 class="widget-title grey lighter">
 						<i class="ace-icon fa fa-leaf green"></i>
-						Bootdey receipt
+						Klinik Aafia
 					</h3>
 
 					<div class="widget-toolbar no-border invoice-info">
 						<span class="invoice-info-label">Invoice:</span>
-						<span class="red">#121212</span>
+						<span class="red">#{{ $data['no_transaksi'] ?? null }}</span>
 
 						<br>
 						<span class="invoice-info-label">Date:</span>
-						<span class="blue">{{ $req->tanggal }}</span>
+						<span class="blue">{{ $data['tanggal'] ?? null }}</span>
 					</div>
 
 					<div class="widget-toolbar hidden-480">
@@ -1077,36 +1077,26 @@ label.arrowed,
 							<div class="col-sm-6">
 								<div class="row">
 									<div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
-										<b>Company Info</b>
+										<b>Dokter</b>
 									</div>
 								</div>
 
 								<div>
 									<ul class="list-unstyled spaced">
 										<li>
-											<i class="ace-icon fa fa-caret-right blue"></i>Street, City
+											<i class="ace-icon fa fa-caret-right blue"></i>Nama Dokter
+											<i></i> : {{ $data['nama_dokter'] ?? null  }}
 										</li>
 
 										<li>
-											<i class="ace-icon fa fa-caret-right blue"></i>Zip Code
+											<i class="ace-icon fa fa-caret-right blue"></i>Poli
+											<i></i> : {{ $data['poli'] ?? null  }}
 										</li>
 
-										<li>
-											<i class="ace-icon fa fa-caret-right blue"></i>State, Country
-										</li>
-
-										<li>
-											<i class="ace-icon fa fa-caret-right blue"></i>
-Phone:
-											<b class="red">111-111-111</b>
-										</li>
+										
 
 										<li class="divider"></li>
 
-										<li>
-											<i class="ace-icon fa fa-caret-right blue"></i>
-											Paymant Info
-										</li>
 									</ul>
 								</div>
 							</div><!-- /.col -->
@@ -1114,30 +1104,29 @@ Phone:
 							<div class="col-sm-6">
 								<div class="row">
 									<div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
-										<b>Customer Info</b>
+										<b>Pasien</b>
 									</div>
 								</div>
 
 								<div>
 									<ul class="list-unstyled  spaced">
 										<li>
-											<i class="ace-icon fa fa-caret-right green"></i>Street, City
+											<i class="ace-icon fa fa-caret-right green"></i>Nama Pasien
+											<i></i> : {{ $data['nama_pasien'] ?? null  }}
 										</li>
 
 										<li>
-											<i class="ace-icon fa fa-caret-right green"></i>Zip Code
+											<i class="ace-icon fa fa-caret-right green"></i>Nomor Rekam Medis
+											<i></i> : {{ $data['nama_dokter'] ?? null  }}
 										</li>
 
 										<li>
-											<i class="ace-icon fa fa-caret-right green"></i>State, Country
+											<i class="ace-icon fa fa-caret-right green"></i>Jumlah Tindakan
+											<i></i> : {{ count($data['tindakan']) ?? null }}
 										</li>
 
 										<li class="divider"></li>
 
-										<li>
-											<i class="ace-icon fa fa-caret-right green"></i>
-											Contact Info
-										</li>
 									</ul>
 								</div>
 							</div><!-- /.col -->
@@ -1152,24 +1141,24 @@ Phone:
 										<th class="center">#</th>
 										<th>Poli</th>
 										<th class="hidden-xs">Deskripsi</th>
-										<th class="hidden-480">Harga</th>
-										<th>Total</th>
+										<th class="hidden-480"></th>
+										<th></th>
 									</tr>
 								</thead>
 
 								<tbody>
-								@foreach($tindakan as $a => $value)
+								@foreach($data['tindakan'] as $a => $value)
 									<tr>
-										<td class="center">1</td>
+										<td class="center">{{$a+1 ?? null }}</td>
 
 										<td>
-											<a href="#">{{$req->poli}}</a>
+											<a href="#">{{$data['poli'] ?? null }}</a>
 										</td>
 										<td class="hidden-xs">
-											{{$value}}
+											{{$data['tindakan'][$a]->tindakan }}
 										</td>
-										<td class="hidden-480"> --- </td>
-										<td>$10</td>
+										<td class="hidden-480">  </td>
+										<td></td>
 									</tr>
 								@endforeach
 								</tbody>
@@ -1182,16 +1171,14 @@ Phone:
 							<div class="col-sm-5 pull-right">
 								<h4 class="pull-right">
 									Total amount :
-									<span class="red">$395</span>
+									<span class="red">Rp {{$data['hargatotal']}}</span>
 								</h4>
 							</div>
-							<div class="col-sm-7 pull-left"> Extra Information </div>
 						</div>
 
 						<div class="space-6"></div>
 						<div class="well">
-							Thank you for choosing Ace Company products.
-We believe you will be satisfied by our services.
+							
 						</div>
 					</div>
 				</div>

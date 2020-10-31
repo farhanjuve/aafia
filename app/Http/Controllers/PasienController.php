@@ -15,7 +15,7 @@ class PasienController extends Controller
 			//return $request;
 			$pasienDB = new Pasien();
 			
-			$pasienDB->no_rm = 01;
+			$pasienDB->no_rm = Carbon::now()->format('dHis');
 			$pasienDB->name = $request->name ?? "";
 			$pasienDB->nik = $request->nik ?? "";
 			$pasienDB->lp = $request->gender ?? "";

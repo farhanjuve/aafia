@@ -103,7 +103,7 @@
           </div>  
 
           <div class="col-md-5 ml-3">
-		  @if($kode == 'dokter')
+		  @if($kode == 'Dokter')
 			<a href="{{route('DokterTransaksi')}}">
               <div class="card card-ikea">
                 <h3>Transaksi</h3>

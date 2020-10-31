@@ -43,6 +43,7 @@ Route::get('/RegisTransaksi', [TransactionController::class, 'index'])->name('Re
 Route::get('/DokterTransaksi', [TransactionController::class, 'dokter'])->name('DokterTransaksi');
 Route::get('/TindakanTransaksi/', [TransactionController::class, 'tindakan']);
 Route::get('/TindakanTransaksi/{created_at}', [TransactionController::class, 'tindakan_transaksi'])->name('TindakanTransaksi');
+Route::get('/Kasir/{created_at}', [TransactionController::class, 'kasirBayar'])->name('BayarBeneran');
 Route::post('/BayarTransaksi', [TransactionController::class, 'bayar'])->name('BayarTransaksi');
 Route::post('/RegisTransaksi', [TransactionController::class, 'index'])->name('Registernew');
 Route::delete('delete/pasien/{id}', [PasienController::class, 'hapusPasien'])->name('hapus-pasien');

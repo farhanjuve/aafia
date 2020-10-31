@@ -29,19 +29,21 @@
 								<th>Tanggal</th>
 								<th>No. Rekam Medis</th>
 								<th>Nama Pasien</th>
+								<th>Poli</th>
 								<th>Status</th>
 								<th style="text-align:center">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($cek as $data)
+							@foreach($cek as $data => $value)
 							<tr>
-								<td>{{"1"}}</td>
-								<td>{{\Carbon\Carbon::parse($data->created_at)->format("d M Y")}}</td>
-								<td>{{$data->nomor_rm}}</td>
-								<td>{{$data->nama_pasien}}</td>
-								<td>{{$data->status ? "Mencari dokter" : "Null"}}</td>
-								<td style="text-align:center"><a href="{{ route('TindakanTransaksi', ['created_at' => $data->created_at]) }}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></td>							
+								<td>{{$data+1}}</td>
+								<td>{{\Carbon\Carbon::parse($value->created_at)->format("d M Y")}}</td>
+								<td>{{$value->nomor_rm}}</td>
+								<td>{{$value->nama_pasien}}</td>
+								<td>{{$value->poli}}</td>
+								<td>{{$value->status ? $value->status : "Null"}}</td>
+								<td style="text-align:center"><a href="{{ route('TindakanTransaksi', ['created_at' => $value->created_at]) }}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></td>							
 							</tr>
 							@endforeach
 						</tbody>

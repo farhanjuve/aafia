@@ -287,7 +287,9 @@ h5.ex1 {
                                     <form class="{{ $data->id }}" action="{{ route('hapus-pasien', $data->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-danger" onclick="deleteUser({{$data->id}})"><i class="fa fa-trash"></i></button>
+                                        <button type="button" class="btn btn-danger" onclick="deleteUser({{$data->id}})">
+											<i class="fa fa-trash"></i>
+										</button>
                                     </form>
                                 </td> 
 								</tr>

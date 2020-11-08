@@ -55,7 +55,7 @@ class TransactionController extends Controller
 					   ->orWhere('status', 'Mencari Dokter')
 					   ->orderBy('created_at', 'asc')
 					   ->get()
-					   ->unique('created_at');
+					   ->unique('nomor_transaksi');
 		$statusTransaksi = array("Mencari Dokter", "Menunggu Pembayaran" );
 		
 
@@ -63,14 +63,15 @@ class TransactionController extends Controller
 		$data['nama_pasien'] = Pasien::select('name')->get();
 		//return $data;
 		
-		$data['message'] = null;
+		$data['message'] = "Pasien sudah masuk antrian";
 		//$data['norm'] = null;
 		
 		//$cek = Transaction::whereIn('status', $statusTransaksi)->get();
 		$cek = Transaction::distinct()->select('nomor_rm');
 		$data['listTransaksi'] = $listTransaksi;
-				
-        return view('TransaksiRegister', $data);
+		//return $data;
+
+        return view('TransaksiRegister', $data)->with(['success' => $data["message"]]);
     }
 	
 	public function dokter(){
@@ -155,9 +156,10 @@ class TransactionController extends Controller
 		
 		foreach($request->name as $tindakan => $value){
 			//echo $value;
-			$cek1 = Transaction::where('tindakan', $value)
+			$cek1 = Transaction::where('nomor_transaksi', $request->no_transaksi)
+					->where('tindakan', $value)
 					->first();
-			return $cek1;
+			//return $cek1;
 			if($cek1){
 				$cek1->tindakan_isPick = 1;
 				$cek1->save();
@@ -205,13 +207,13 @@ class TransactionController extends Controller
 	
 	public function kasirBayar($created_at){
 		$cek = DB::table('transaction_tbl')
-			   ->where('created_at', $created_at)
+			   ->where('nomor_transaksi', $created_at)
 			   ->first();
-		$cek2 = DB::table('transaction_tbl')
-				//->select('tindakan')
-				->where('created_at', $created_at)
+		$cek2 = Transaction::where('nomor_transaksi', $created_at)
 				->where('tindakan_isPick', 1)
 				->get();
+		$cek3 = Transaction::where('nomor_transaksi', $created_at)
+				->get();				
 			   
 			$data['no_transaksi'] = $cek->nomor_transaksi;
 			$data['nama_dokter'] = $cek->nama_dokter;
@@ -221,8 +223,10 @@ class TransactionController extends Controller
 			
 			$data['nama_pasien'] = $cek->nama_pasien;
 			$data['poli'] = $cek->poli;
-		//foreach($cek as $data => $value){
-		//}
+		foreach($cek3 as $saving){
+			$saving->status = "Selesai"; 
+			$saving->save();
+		}
 		$data['tanggal'] = \Carbon\Carbon::now()->toFormattedDateString();
 		$data['tindakan'] = $cek2;
 		//return $data['tindakan'];

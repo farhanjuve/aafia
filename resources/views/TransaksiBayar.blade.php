@@ -1045,8 +1045,8 @@ label.arrowed,
 </style>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container bootdey">
-<div class="row">
+<div class="container bootdey" id="printableArea">
+	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<div class="widget-box">
 				<div class="widget-header widget-header-large">
@@ -1055,7 +1055,7 @@ label.arrowed,
 						Klinik Aafia
 					</h3>
 
-					<div class="widget-toolbar no-border invoice-info">
+					<div class="widget-toolbar no-border invoice-info" >
 						<span class="invoice-info-label">Invoice:</span>
 						<span class="red">#{{ $data['no_transaksi'] ?? null }}</span>
 
@@ -1066,7 +1066,7 @@ label.arrowed,
 
 					<div class="widget-toolbar hidden-480">
 						<a href="#">
-							<i class="ace-icon fa fa-print"></i>
+							
 						</a>
 					</div>
 				</div>
@@ -1140,9 +1140,7 @@ label.arrowed,
 									<tr>
 										<th class="center">#</th>
 										<th>Poli</th>
-										<th class="hidden-xs">Deskripsi</th>
-										<th class="hidden-480"></th>
-										<th></th>
+										<th class="hidden-xs">Tindakan</th>
 									</tr>
 								</thead>
 
@@ -1152,13 +1150,11 @@ label.arrowed,
 										<td class="center">{{$a+1 ?? null }}</td>
 
 										<td>
-											<a href="#">{{$data['poli'] ?? null }}</a>
+											{{$data['poli'] ?? null }}
 										</td>
 										<td class="hidden-xs">
 											{{$data['tindakan'][$a]->tindakan }}
 										</td>
-										<td class="hidden-480">  </td>
-										<td></td>
 									</tr>
 								@endforeach
 								</tbody>
@@ -1170,7 +1166,7 @@ label.arrowed,
 						<div class="row">
 							<div class="col-sm-5 pull-right">
 								<h4 class="pull-right">
-									Total amount :
+									Total harga :
 									<span class="red">Rp {{$data['hargatotal']}}</span>
 								</h4>
 							</div>
@@ -1185,4 +1181,8 @@ label.arrowed,
 			</div>
 		</div>
 	</div>
-</div>@endsection
+</div>
+
+<button class="btn btn-primary pull-center" onclick="printContent('printableArea')"><i class="ace-icon fa fa-print"></i> Cetak</button>
+
+@endsection

@@ -12,6 +12,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 	<script src="https://kit.fontawesome.com/4f5fb3f187.js" crossorigin="anonymous"></script>
+	
+	<!-- Swal -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
 	 
 	<!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,10 +28,66 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script type="text/javascript">
 		  // Wait for the DOM to be ready
+		function printDiv(divName) {
+			console.log("hai");
+			 var printContents = document.getElementById(divName).innerHTML;
+			 var originalContents = document.body.innerHTML;
+
+			 document.body.innerHTML = printContents;
+
+			 window.print();
+
+			 document.body.innerHTML = originalContents;
+		}
+		function PrintElem(elem)
+		{
+			var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+			mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+			mywindow.document.write('</head><body >');
+			mywindow.document.write('<h1>' + document.title  + '</h1>');
+			mywindow.document.write(document.getElementById(elem).innerHTML);
+			mywindow.document.write('</body></html>');
+
+			mywindow.document.close(); // necessary for IE >= 10
+			mywindow.focus(); // necessary for IE >= 10*/
+
+			mywindow.print();
+			mywindow.close();
+
+			return true;
+		}
+		function printContent(el){
+		var restorepage = $('body').html();
+		var printcontent = $('#' + el).clone();
+		$('body').empty().html(printcontent);
+		window.print();
+		$('body').html(restorepage);
+		}
+		
+		function deleteUser(params) {
+            swal({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this imaginary file!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.value) {
+                    $('.'+params).submit();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    swal(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                    )
+                }
+            });
+        }
 		
 		
 		$(function() {
-
 			$('.js-example-basic-single').select2();
 
 		});
@@ -45,7 +105,7 @@
 				
 				li.className = 'list-group-item';
 				li.textContent = input.value;
-				ul.innerHTML += '<td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" value="'+input.value+'"/></td>';
+				ul.innerHTML += '<td><input type="text" name="name[]" placeholder="Tindakan disini" class="form-control name_list" value="'+input.value+'"/></td>';
 				
 				//td.className = 'form-control name_list';
 				//td.textContent = input.value;

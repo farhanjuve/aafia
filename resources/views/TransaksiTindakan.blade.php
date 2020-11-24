@@ -123,64 +123,18 @@
 						-->
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+								<form class="form-inline">
+                                
+								<input name="harga" type="number" class="form-control" placeholder="Masukkan harga disini">
+								<small class="form-text text-muted">dalam rupiah</small>
+								<button type="submit" class="btn btn-primary">
                                     {{ __('Kirim ke Kasir') }}
                                 </button>
+								</form>
+
                             </div>
                         </div>
                     </form>
-                </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <a href="#filter-asset" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="filter-asset"><strong>Pencarian</strong><small> Transaksi</small></a>
-                    </div>
-                    <div class="card-body collapse" id="filter-asset">
-                        <form class="form-horizontal" action="#" method="POST">
-                            @csrf
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label" for="hf-email">Nomor Rekam Medis</label>
-                                <div class="col-md-4">
-                                    <input class="form-control" id="hf-email" type="text" name="store_code" placeholder="Enter Store Code.." autocomplete="email">
-                                </div>
-                                <label class="col-md-2 col-form-label" for="hf-email">Tanggal pendaftaran</label>
-                                <div class="col-md-4">
-                                    <input class="form-control" id="tanggal" type="date" name="address_code" placeholder="Enter Address Code.." autocomplete="email">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                                <div class="col-sm-6">
-                                    <input type="submit" name="submit" class="btn btn-info btn-sm" value="Search">
-                                    <input type="submit" name="export" class="btn btn-info btn-sm" value="Export">
-                                    <input type="reset" name="reset" class="btn btn-info btn-sm" value="Clear">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-				<div class="card">
-                    <div class="card-header">
-                        <a href="#daftarPasien" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="filter-asset"><strong>Daftar</strong><small> Transaksi</small></a>
-                    </div>				
-                    <div class="card-body collapse" id="daftarPasien" style="overflow-x:auto;">
-                        <table class="table table-responsive-sm">
-						<thead>
-							<tr>
-								<th>No</th>
-								<th>Tanggal</th>
-								<th>No. Rekam Medis</th>
-								<th>Nama Pasien</th>
-								<th>Status</th>
-								<th style="text-align:center">Aksi</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-
-
-                    </div>
                 </div>
             </div>
         </div>

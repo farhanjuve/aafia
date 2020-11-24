@@ -146,13 +146,13 @@ class TransactionController extends Controller
 	public function bayar(Request $request){
 		$hargatotal = 0;
 		$data = array();
-		//return $request;
 		$data['req'] = $request;
 		$data['tindakan'] = $request->name;
 		$data['tanggal'] = $request->tanggal;
 		$data['nama_pasien'] = $request->nama_pasien;
 		$data['poli'] = $request->poli;
 		$data['message'] = "Selesai, pasien dimohon membayar ke kasir";
+		//return $request;
 		
 		foreach($request->name as $tindakan => $value){
 			//echo $value;
@@ -179,7 +179,7 @@ class TransactionController extends Controller
 				$newTransaction->tindakan = $value;
 				$newTransaction->tindakan_isPick = 1;
 				$newTransaction->status = "Mendapat Dokter";
-				$newTransaction->harga = "0";
+				//$newTransaction->harga = 123;
 
 				$newTransaction->save();
 			}
@@ -190,7 +190,7 @@ class TransactionController extends Controller
 				
 		foreach($cek2 as $saving){
 			$saving->status = "Menunggu Pembayaran"; 
-			$saving->harga = $hargatotal; 
+			$saving->harga = $request->harga ?? $hargatotal; 
 			$saving->save(); 
 		}
 		/*

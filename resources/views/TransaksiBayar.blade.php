@@ -1117,7 +1117,7 @@ label.arrowed,
 
 										<li>
 											<i class="ace-icon fa fa-caret-right green"></i>Nomor Rekam Medis
-											<i></i> : {{ $data['nama_dokter'] ?? null  }}
+											<i></i> : {{ $data['norm'] ?? null  }}
 										</li>
 
 										<li>

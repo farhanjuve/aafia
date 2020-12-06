@@ -37,6 +37,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/welcome', [HomeController::class, 'index'])->name('welcome');
 Route::get('/home', [HomeController::class, 'index']);
 
+Route::get('/datakaryawan', [HomeController::class, 'dataKaryawan'])->name('dtkar');
+Route::get('/datapasien', [HomeController::class, 'dataPasien'])->name('dtpas');
+Route::get('/datadokter', [HomeController::class, 'dataDokter'])->name('dtdok');
+Route::get('/datatransaksi', [HomeController::class, 'dataTransaksi'])->name('dttrx');
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('home');
 Route::get('/RegisPasien', [HomeController::class, 'RegisPasien'])->name('RegisPasien');
 Route::get('/RegisTransaksi', [TransactionController::class, 'index'])->name('RegisTransaksi');

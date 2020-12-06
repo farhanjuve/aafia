@@ -1,57 +1,89 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
 <head>
-    <meta name="description" content="DMS">
-    <meta name="author" content="Iqbal Taufiq Ahmad Nur">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.29.2/sweetalert2.all.js"></script>
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <title>DMS</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{asset('admin-lte/plugins/fontawesome-free/css/all.min.css')}}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="{{ asset('admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{ asset('admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{{ asset('admin-lte/plugins/jqvmap/jqvmap.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('admin-lte/dist/css/adminlte.min.css')}}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ asset('admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{{ asset('admin-lte/plugins/daterangepicker/daterangepicker.css')}}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{ asset('admin-lte/plugins/summernote/summernote-bs4.css')}}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="app" style="background">
-    <div id="app">
-        <header class="app-header navbar" style="padding: 0rem 1rem;">
-			<a class="navbar-brand" href="{{ url('digital-dashboard-dms') }}">
-				<img style="width:100%;" src="{{ asset('assets/img/dhl-logo.png')}}" alt="">
-			</a>
-			<a>
-				<span><strong>{{\Carbon\Carbon::now('Asia/Jakarta')->format("d-m-Y h:i")}}</strong></span>
-			</a>
-		</header>
-        <div class="app-body">
-            <main class="main">
-                <div class="container-fluid">
-                    <div class="animated fadeIn">
-                        @yield('content')
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-    <script>
-        
-    </script>
-</body>
-<style>
-	body{
-		background-image: url("{{url('/assets/img/background-dhl.jpg')}}");
-			  background-position: center;
-			  background-repeat: no-repeat;
-			  height: 100%;				
-			  min-height: 580px;
-			  overflow:hidden !important;
-	}
-	
-</style>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<div id="app">
+			@include('layouts.header')
+			<div class="app-body">
+				@include('layouts.sidebar')
+				<main class="main">
+							@yield('content')
+
+				</main>
+			</div>
+			
+			<!-- Footer -->
+			<footer class="main-footer">
+				<small><a href="http://adminlte.io">Copyright</a>&copy;.</small>
+				2020
+				<div class="float-right d-none d-sm-inline-block">
+				  <b>Version</b> 1.0
+				</div>
+			</footer>
+		</div>
+	</div>
+
+<!-- jQuery -->
+<script src="{{ asset('admin-lte/plugins/jquery/jquery.min.js')}}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{ asset('admin-lte/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-	setInterval(function() {
-		window.location.replace("{{route('digital-dashboard-dms')}}");
-	}, 10000); 
+  $.widget.bridge('uibutton', $.ui.button)
 </script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- ChartJS -->
+<script src="{{ asset('admin-lte/plugins/chart.js/Chart.min.js')}}"></script>
+<!-- Sparkline -->
+<script src="{{ asset('admin-lte/plugins/sparklines/sparkline.js')}}"></script>
+<!-- JQVMap -->
+<script src="{{ asset('admin-lte/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{ asset('admin-lte/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{{ asset('admin-lte/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+<!-- daterangepicker -->
+<script src="{{ asset('admin-lte/plugins/moment/moment.min.js')}}"></script>
+<script src="{{ asset('admin-lte/plugins/daterangepicker/daterangepicker.js')}}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ asset('admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+<!-- Summernote -->
+<script src="{{ asset('admin-lte/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!-- overlayScrollbars -->
+<script src="{{ asset('admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('admin-lte/dist/js/adminlte.js')}}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{ asset('admin-lte/dist/js/pages/dashboard.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('admin-lte/dist/js/demo.js')}}"></script>
+</body>
 </html>

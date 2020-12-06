@@ -1,31 +1,26 @@
-<header class="app-header navbar" style="padding: 0rem 1rem;">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="{{ url('/') }}">
-        <img style="width:100%;" src="{{ asset('assets/img/dhl-logo.png')}}" alt="">
-    </a>
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <ul class="nav navbar-nav ml-auto mr-3">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                {{ Auth::user()->name }}
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow mt-2">
-                <a class="dropdown-item">
-                    {{ Auth::user()->name }}<br>
-                    <small class="text-muted">{{ Auth::user()->email }}</small>
-                </a>
-                <div class="divider"></div>
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </div>
-        </li>
+<!DOCTYPE html>
+<html>
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ url('/') }}" class="nav-link">Home</a>
+      </li>
     </ul>
-</header>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->

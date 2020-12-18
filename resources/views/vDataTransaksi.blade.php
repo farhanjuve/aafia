@@ -174,6 +174,38 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
+			<div class="card">
+              <div class="card-header">
+			    <a href="#filter-asset" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="filter-asset"><strong>Filter</strong><small> Dokter</small></a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+				<div class="card-body collapse" id="filter-asset">
+					<form class="form-horizontal" action="{{ route('dttrx-filter') }}" method="POST">
+						@csrf
+						<div class="form-group row">
+
+							<label class="col-md-2 col-form-label" for="hf-email">Nama Dokter</label>
+							<div class="col-md-4">
+								<select class="form-control" id="dokter" name="dokter" style="width: 100%;">
+								@foreach($transaksi->unique('nama_dokter') as $trx)
+									<option value="{{$trx->nama_dokter}}" {{(request()->input("dokter")==$trx->nama_dokter) ? "selected" : ""}}>{{$trx->nama_dokter}}</option>
+								@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<input type="submit" name="submit" class="btn btn-info btn-sm" value="Search">
+								<input type="submit" name="download_report" class="btn btn-info btn-sm" value="Download">
+							</div>
+						</div>
+					</form>
+				</div>			  
+			  <!-- body -->
+			  </div>
+              <!-- /.card-body -->
+            </div>
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Data Transaksi</h3>
@@ -189,7 +221,8 @@
                     <th>Nama Dokter</th>
                     <th>Poli</th>
                     <th>Status</th>
-                    <th>Update Terakhir</th>
+                    <th>Harga</th>
+                    <th>Tanggal</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -202,7 +235,8 @@
 						<td>{{$data->nama_dokter ?? null}}</td>
 						<td>{{$data->poli}}</td>
 						<td>{{$data->status}}</td>
-						<td>{{$data->updated_at}}</td>
+						<td style="width:150px">{{ 'Rp '.number_format($data->harga,2,',','.')}}</td>
+						<td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $data->updated_at)->format('M d Y')}}</td>
 					</tr>
 					<?php $i++; ?>
 					@endforeach
@@ -215,6 +249,7 @@
                     <th>Nama Dokter</th>
                     <th>Poli</th>
                     <th>Status</th>
+                    <th>Harga</th>
                     <th>Update Terakhir</th>
                   </tr>
                   </tfoot>

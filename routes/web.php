@@ -41,6 +41,8 @@ Route::get('/datakaryawan', [HomeController::class, 'dataKaryawan'])->name('dtka
 Route::get('/datapasien', [HomeController::class, 'dataPasien'])->name('dtpas');
 Route::get('/datadokter', [HomeController::class, 'dataDokter'])->name('dtdok');
 Route::get('/datatransaksi', [HomeController::class, 'dataTransaksi'])->name('dttrx');
+Route::post('/datatransaksi', [HomeController::class, 'dataTransaksi'])->name('dttrx-filter');
+
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('home');
 Route::get('/RegisPasien', [HomeController::class, 'RegisPasien'])->name('RegisPasien');
 Route::get('/RegisTransaksi', [TransactionController::class, 'index'])->name('RegisTransaksi');

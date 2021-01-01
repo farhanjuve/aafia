@@ -170,10 +170,23 @@
     </section>
 
     <!-- Main content -->
+	            
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
+			@if ($message = Session::get('success'))
+				<div class="alert alert-success alert-block" style="margin-top:1.5rem">
+					<button type:button class="close" data-dismiss="alert">x</button>
+					<strong>{{ $message }}</strong>
+				</div>
+			@endif
+			@if ($message = Session::get('error'))
+				<div class="alert alert-danger alert-block" style="margin-top:1.5rem">
+					<button type:button class="close" data-dismiss="alert">x</button>
+					<strong>{{ $message }}</strong>
+				</div>
+			@endif
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Data Pasien</h3>
@@ -184,10 +197,13 @@
                   <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nomor Rekam Medis</th>
+                    <th>Rekam Medis</th>
+                    <th>NIK</th>
                     <th>Nama Pasien</th>
                     <th>Gender</th>
                     <th>Tanggal Pendaftaran</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -195,19 +211,34 @@
 					<tr>
 						<td>{{ $key+1 }}</td>
 						<td>{{$data->no_rm}}</td>
+						<td>{{$data->nik}}</td>
 						<td>{{$data->name}}</td>
 						<td>{{$data->lp}}</td>
 						<td>{{$data->created_at}}</td>
+						<td style="text-align:center">
+							<a href="{{ route('editPasien', ['id' => $data->id]) }}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a>
+							
+						</td>						
+						<td style="text-align:center">
+							<form class="{{ $data->id }}" action="{{ route('hapus-pasien', ['id' => $data->id]) }}" method="post">
+                                   @csrf
+                                   @method('DELETE')
+								<a><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
+							</form>
+						</td>
 					</tr>
 					@endforeach
                   </tbody>
                   <tfoot>
                   <tr>
                     <th>No</th>
-                    <th>Nomor Rekam Medis</th>
+                    <th>Rekam Medis</th>
+                    <th>NIK</th>
                     <th>Nama Pasien</th>
                     <th>Gender</th>
                     <th>Tanggal Pendaftaran</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                   </tfoot>
                 </table>

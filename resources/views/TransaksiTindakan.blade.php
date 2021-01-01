@@ -18,64 +18,62 @@
                         <strong>{{ $message }}</strong>
                     </div>
                 @endif
-                <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+            <div class="card">
+                <div class="card-header">
+					<h4>{{ __('Nomor Transaksi : ') }} {{$data['no_transaksi'] ?? ''}}
+						<small class="float-sm-right">{{ __('Tanggal Periksa : ') }}{{$data['tanggal'] ?? ''}}</small>
+					</h4>
+				</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('BayarTransaksi') }}">
                         @csrf
 						<div class="row register-form">
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Periksa') }}</label>
+						
+							<div class="col-md-4">
+								<div class="form-group row">
+									<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Dokter') }}</label>
 
-								<div class="col-md-6">
-									<input id="tanggal" type="text" class="form-control" name="tanggal" readonly autofocus value="{{$data['tanggal'] ?? ''}}">
-								</div>
-							</div>  
+									<div class="col-md-6">
+										<input id="nama_dokter" type="text" class="form-control" name="nama_dokter" readonly autofocus value="{{$data['nama_dokter'] ?? ''}}">
+									</div>
+								</div>							
+								<div class="form-group row">
+									<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Poli') }}</label>
 
-							<div class="form-group row">
-								<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nomor RM') }}</label>
-
-								<div class="col-md-6">
-									<input id="norm" type="text" class="form-control" name="norm" readonly autofocus value="{{$data['norm'] ?? ''}}">
-								</div>
+									<div class="col-md-6">
+										<input id="poli" type="text" class="form-control" name="poli" readonly autofocus value="{{$data['poli'] ?? ''}}">
+									</div>
+								</div>						
 							</div>
-							
-							<div class="form-group row">
-								<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Transaksi') }}</label>
+							<div class="col-md-4">	
+								<div class="form-group row">
+									<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Pasien') }}</label>
 
-								<div class="col-md-6">
-									<input id="no_transaksi" type="text" class="form-control" name="no_transaksi" readonly autofocus value="{{$data['no_transaksi'] ?? ''}}">
+									<div class="col-md-6">
+										<input id="nama_pasien" type="text" class="form-control" name="nama_pasien" readonly autofocus value="{{$data['nama_pasien'] ?? ''}}">
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-md-6">	
-							<div class="form-group row">
-								<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Pasien') }}</label>
 
-								<div class="col-md-6">
-									<input id="nama_pasien" type="text" class="form-control" name="nama_pasien" readonly autofocus value="{{$data['nama_pasien'] ?? ''}}">
-								</div>
-							</div>
+								<div class="form-group row">
+									<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nomor RM') }}</label>
 
-							<div class="form-group row">
-								<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Poli') }}</label>
+									<div class="col-md-6">
+										<input id="norm" type="text" class="form-control" name="norm" readonly autofocus value="{{$data['norm'] ?? ''}}">
+									</div>
+								</div>						
+							</div>	
+							<div class="col-md-4">
+								<div class="form-group row">
+									<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Periksa') }}</label>
 
-								<div class="col-md-6">
-									<input id="poli" type="text" class="form-control" name="poli" readonly autofocus value="{{$data['poli'] ?? ''}}">
-								</div>
-							</div>						
+									<div class="col-md-6">
+										<input id="tanggal" type="text" class="form-control" name="tanggal" readonly autofocus value="{{$data['tanggal'] ?? ''}}">
+									</div>
+								</div>  
 
-							<div class="form-group row">
-								<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Dokter') }}</label>
-
-								<div class="col-md-6">
-									<input id="nama_dokter" type="text" class="form-control" name="nama_dokter" readonly autofocus value="{{$data['nama_dokter'] ?? ''}}">
-								</div>
 							</div>							
-                        </div>							
-                        </div>							
+						</div>							
 						
 						<div class="container">
 							<div class="row justify-center">
@@ -83,6 +81,8 @@
 								<header>
 								  <h1>Daftar Tindakan</h1>
 								</header>
+							  </div>
+							  <div class="col-md-6">
 								<div class="form-group row">		
 									<div class="col-md-3">
 										<div class="input-group-append">
@@ -104,29 +104,18 @@
 										</div>
 									</div>
 								</div>								
-
 							  </div>
-							  <div class="col-12">
+							  <div class="col-md-6">
 								<ul id="list-add" name="list-add" class="list-group">
 								</ul>
 							  </div>
 							</div>
 						</div>
-						<!--
-						<div class="form-group row">
-                            <label for="name" class="col-md-10 col-form-label text-md-right">{{ __('Harga total') }}</label>
-
-                            <div class="col-md-2">
-                                <input readonly autofocus value="Rp1.500.000">
-                            </div>
-                        </div>
-						-->
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-6">
 								<form class="form-inline">
                                 
-								<input name="harga" type="number" class="form-control" placeholder="Masukkan harga disini">
-								<small class="form-text text-muted">dalam rupiah</small>
+								<input style="margin-top:1.5rem" name="harga" type="number" class="form-control" placeholder="Harga (dalam rupiah)">
 								<button type="submit" class="btn btn-primary">
                                     {{ __('Kirim ke Kasir') }}
                                 </button>

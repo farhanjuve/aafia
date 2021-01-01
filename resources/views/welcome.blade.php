@@ -130,7 +130,7 @@
           </div>
 
           <div class="col-md-5">
-            <a href="#">
+            <a href="{{ url('/register')}}">
               <div class="card card-configuration">
                 <h3>Configuration</h3> 
                 <p>Khusus admin + penambahan user dan dokter</p>

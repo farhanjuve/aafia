@@ -10,6 +10,7 @@ use App\Models\Pasien;
 use App\Models\Dokter;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Session;
 
 class TransactionController extends Controller
 {
@@ -32,8 +33,8 @@ class TransactionController extends Controller
 		if($request->submit) {
 			//return $request;
 			$tindakan = DB::table('tindakan_tbl')->get();
-			$dataPasien = Pasien::where('no_rm', $request->identitas)->orWhere('name', $request->identitas)->first();
-
+			$dataPasien = Pasien::where('name', $request->identitas)->orWhere('no_rm', $request->identitas)->first();
+			//return $request->identitas;
 			foreach ($tindakan as $key => $value) {
 				$newTransaction = new Transaction();
 				
@@ -154,35 +155,43 @@ class TransactionController extends Controller
 		$data['message'] = "Selesai, pasien dimohon membayar ke kasir";
 		//return $request;
 		
-		foreach($request->name as $tindakan => $value){
-			//echo $value;
-			$cek1 = Transaction::where('nomor_transaksi', $request->no_transaksi)
-					->where('tindakan', $value)
-					->first();
-			//return $cek1;
-			if($cek1){
-				$cek1->tindakan_isPick = 1;
-				$cek1->save();
-
-				$harga = Tindakan::where('deskripsi', $value)
-						->select('harga')
+		if($request->name){
+			foreach($request->name as $tindakan => $value){
+				//echo $value;
+				$cek1 = Transaction::where('nomor_transaksi', $request->no_transaksi)
+						->where('tindakan', $value)
 						->first();
-				$hargatotal += $harga->harga;
-			} else {
-				$newTransaction = new Transaction();
-				
-				$newTransaction->nomor_transaksi = $request->no_transaksi;
-				$newTransaction->nomor_rm = $request->norm;
-				$newTransaction->poli = $request->poli;
-				$newTransaction->nama_pasien = $request->nama_pasien;
-				$newTransaction->nama_dokter = $request->nama_dokter;
-				$newTransaction->tindakan = $value;
-				$newTransaction->tindakan_isPick = 1;
-				$newTransaction->status = "Mendapat Dokter";
-				//$newTransaction->harga = 123;
+				//return $cek1;
+				if($cek1){
+					$cek1->tindakan_isPick = 1;
+					$cek1->save();
 
-				$newTransaction->save();
+					$harga = Tindakan::where('deskripsi', $value)
+							->select('harga')
+							->first();
+					$hargatotal += $harga->harga;
+				} else {
+					$newTransaction = new Transaction();
+					
+					$newTransaction->nomor_transaksi = $request->no_transaksi;
+					$newTransaction->nomor_rm = $request->norm;
+					$newTransaction->poli = $request->poli;
+					$newTransaction->nama_pasien = $request->nama_pasien;
+					$newTransaction->nama_dokter = $request->nama_dokter;
+					$newTransaction->tindakan = $value;
+					$newTransaction->tindakan_isPick = 1;
+					$newTransaction->status = "Mendapat Dokter";
+					//$newTransaction->harga = 123;
+
+					$newTransaction->save();
+				}
 			}
+		} else {
+			Session::put('message', 'Tindakan belum diisi, silahkan ');
+			$data = Session::all();
+			//return $data;
+			return view('ErrorPage');
+			//return view('ErrorPage')->with(session(['success' => $data["message"]]));
 		}
 		//return $hargatotal;
 		$cek2 = Transaction::where('nomor_transaksi', $request->no_transaksi)
@@ -234,6 +243,32 @@ class TransactionController extends Controller
 		
 		
 		return view('TransaksiBayar', ['data' => $data, 'created_at' => $created_at]);
+	}
+	
+	public function hapusTransaksi($id){
+		try{
+            $data = array();
+            
+			$karyawan = DB::table('transaction_tbl')
+						->where('nomor_transaksi', $id)
+						;
+            $karyawan->delete();
+
+            $data["status"] = "success";
+            $data["message"] = "Success delete " .$id;
+
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            $data["status"] = "error";
+            $data["message"] = "Error delete ";
+        }
+
+        if ($data["status"] == "success") {
+			return \Redirect::route('RegisTransaksi')->with(['success' => $data["message"]]);
+        }
+        else{
+			return \Redirect::route('RegisTransaksi')->with(['error' => $data["message"]]);
+        }
 	}
 
 }

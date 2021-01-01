@@ -27,15 +27,20 @@ h5.ex1 {
                         <a><strong>Pasien</strong><small> Formulir</small></a>
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal" action="{{route('daftarPasien')}}" method="POST">
+                        <form class="form-horizontal" action="{{route('daftarPasien')}}" id="contact_form" name="contact_form" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input id="name" name="name" type="text" class="form-control" placeholder="Nama lengkap*" value="">
+											<input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="" required autofocus placeholder="Nama lengkap *">
+											@error('name')
+												<span class="invalid-feedback" role="alert">
+													<strong>Nama diisi</strong>
+												</span>
+											@enderror
                                         </div>
                                         <div class="form-group">
-                                            <input id="nik" name="nik" type="number" class="form-control" placeholder="NIK*" value="">
+                                            <input id="nik" name="nik" type="number" class="form-control" placeholder="NIK*" value="" required>
                                         </div>
                                         <div class="form-group">
 											<i>Jenis Kelamin</i>
@@ -54,7 +59,7 @@ h5.ex1 {
 											<i>Golongan darah</i>
                                             <div class="maxl">
                                                 <label class="radio inline"> 
-                                                    <input type="radio" name="goldar" value="A">
+                                                    <input type="radio" name="goldar" value="A" checked="">
                                                     <span> A </span> 
                                                 </label>
                                                 <label class="radio inline"> 
@@ -75,7 +80,7 @@ h5.ex1 {
 										
 										
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Tempat tanggal lahir *">
+                                            <input type="text" class="form-control" placeholder="Tempat tanggal lahir, contoh : Solo, 31/12/2020" required>
                                         </div>
 										<div class="form-group">
                                             <input id="bb" name="bb" type="number" class="form-control" placeholder="Berat badan">
@@ -90,8 +95,10 @@ h5.ex1 {
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="telepon" class="form-control" placeholder="Nomor telepon*" value="">
+                                            <input type="text" minlength="6" maxlength="16" id="telepon" name="telepon" class="form-control" placeholder="Nomor telepon*" value="">
                                         </div>
+										<div class="col-sm-12 error-msg" style="margin-left: 15px;"></div>  
+
                                         <div class="form-group">
                                             <input id="pekerjaan" name="pekerjaan" type="text" class="form-control" placeholder="Pekerjaan*" value="">
                                         </div>
@@ -131,7 +138,7 @@ h5.ex1 {
                                             </div>
                                         </div>
 										<div class="form-group">
-                                            <input id="alamat" name="alamat" type="text" class="form-control" placeholder="Alamat*" value="">
+                                            <input id="alamat" name="alamat" type="text" class="form-control" placeholder="Alamat *" value="" required>
                                         </div>
 										<div class="form-group">
                                             <input id="tekanan_darah" name="tekanan_darah" type="text" class="form-control" placeholder="Tekanan darah" value="">
@@ -145,10 +152,10 @@ h5.ex1 {
 								<div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input id="wali_name" name="wali_name" type="text" class="form-control" placeholder="Nama Wali/Keluarga*" value="" >
+                                            <input id="wali_name" name="wali_name" type="text" class="form-control" placeholder="Nama Wali/Keluarga" value="" >
                                         </div>
                                         <div class="form-group">
-                                            <input id="wali_telp" name="wali_telp" type="number" class="form-control" placeholder="Nomor telepon*" value="">
+                                            <input id="wali_telp" name="wali_telp" type="number" class="form-control" placeholder="Nomor telepon" value="">
                                         </div>
                                         
                                         <h5 class="ex1">Riwayat Kesehatan</h5>
@@ -223,37 +230,9 @@ h5.ex1 {
 										<div class="form-group">
                                             <input id="kebiasaan" name="kebiasaan" type="text" class="form-control" placeholder="Kebiasaan buruk" value="">
                                         </div>																				
-                                        <input type="submit" name="submit" class="btnRegister" value="Register">
-                                    </div>
+                                        <input type="submit" name="submit" class="btn btn-warning" value="Daftarkan"></input>
+									</div>
                                 </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <a href="#filter-asset" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="filter-asset"><strong>Pencarian</strong><small> Pasien</small></a>
-                    </div>
-                    <div class="card-body collapse" id="filter-asset">
-                        <form class="form-horizontal" action="#" method="POST">
-                            @csrf
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label" for="hf-email">Nomor Rekam Medis</label>
-                                <div class="col-md-4">
-                                    <input class="form-control" id="hf-email" type="text" name="store_code" placeholder="Enter Store Code.." autocomplete="email">
-                                </div>
-                                <label class="col-md-2 col-form-label" for="hf-email">Tanggal pendaftaran</label>
-                                <div class="col-md-4">
-                                    <input class="form-control" id="tanggal" type="date" name="address_code" placeholder="Enter Address Code.." autocomplete="email">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                                <div class="col-sm-6">
-                                    <input type="submit" name="submit" class="btn btn-info btn-sm" value="Search">
-                                    <input type="submit" name="export" class="btn btn-info btn-sm" value="Export">
-                                    <input type="reset" name="reset" class="btn btn-info btn-sm" value="Clear">
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -304,4 +283,56 @@ h5.ex1 {
         </div>
 	</div>
 </div>
+<script type="text/javascript">
+  // Wait for the DOM to be ready
+  $(function() {
+    // Initialize form validation on the registration form.
+    // It has the name attribute "registration"
+
+    jQuery.validator.addMethod("specialChars", function( value, element ) {
+        var regex = new RegExp("^[A-Za-z0-9_.]+$");
+        var key = value;
+
+        if (!regex.test(key)) {
+           return false;
+        }
+        return true;
+    }, "please use only alphanumeric or alphabetic characters");
+
+    $("form[name='contact_form']").validate({
+      // Specify validation rules
+      rules: {
+        // The key name on the left side is the name attribute
+        // of an input field. Validation rules are defined
+        // on the right side 
+        telepon: "required",
+      },
+      // Specify validation error messages
+      messages: { 
+        telepon: "Nomor telepon minimal 10 hingga 16 karakter"
+      },
+      errorPlacement: function (error, element) {
+          $(element).closest('.form-group').find('.error-msg').text(error.text());
+      },
+      // Make sure the form is submitted to the destination defined
+      // in the "action" attribute of the form when valid
+      submitHandler: function(form) { 
+        form.submit();
+      }
+      
+    });
+
+    @if (strpos(request()->header('User-Agent'), 'Chrome') === false) 
+      $( "input[type=date]" ).datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+      $( "input[type=date]" ).on( "change", function() {
+        $( "input[type=date]" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      }); 
+
+    @endif
+    
+  });
+</script>
 @endsection

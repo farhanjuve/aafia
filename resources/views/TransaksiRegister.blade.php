@@ -36,14 +36,14 @@
 							@csrf
 
 							<div class="form-group row">
-								<label for="name" class="col-md-4 col-form-label text-md-right">Nomor RM</label>
+								<label for="name" class="col-md-4 col-form-label text-md-right">Nama Pasien</label>
 															
 								<div class="col-md-6">								
 									<select class="js-example-basic-single" id="identitas" name="identitas" style="width: 100%;">
-										<option class="hidden" selected="" disabled="">Nomor Rekam Medis*</option>
+										<option class="hidden" selected="" disabled="">Nama*</option>
 										@foreach($norm as $rmno)
-											<option value="{{$rmno->no_rm}}" {{(request()->input("norm")==$rmno) ? "selected" : ""}}>{{$rmno->no_rm}}</option>
-										@endforeach
+										<!--	<option value="{{$rmno->no_rm}}" {{(request()->input("norm")==$rmno) ? "selected" : ""}}>{{$rmno->no_rm}}</option>
+										-->@endforeach
 										@foreach($nama_pasien as $nama)
 											<option value="{{$nama->name}}" {{(request()->input("nama_pasien")==$nama) ? "selected" : ""}}>{{$nama->name}}</option>
 										@endforeach
@@ -103,13 +103,13 @@
 								@if($data->status == "Menunggu Pembayaran")
 								<td style="text-align:center"><a href="{{ route('BayarBeneran', ['created_at' => $data->nomor_transaksi]) }}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></td>
 								@else
-								<form class="{{ $data->id }}" action="{{ route('hapus-pasien', $data->id) }}" method="post">
-									@csrf
-									@method('DELETE')
-									<td style="text-align:center">
-										<button type="button" class="btn btn-danger" onclick="deleteUser({{$data->id}})"><i class="fa fa-trash"></i></button>
-									</td>
-								</form>
+								<td style="text-align:center">
+									<form class="{{ $data->id }}" action="{{ route('transaction-destroy', ['id' => $data->nomor_transaksi]) }}" method="post">
+										   @csrf
+										   @method('DELETE')
+										<a><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
+									</form>
+								</td>
 								@endif
 							</tr>
 							@endforeach

@@ -193,6 +193,22 @@
 								@endforeach
 								</select>
 							</div>
+							<label class="col-md-2 col-form-label" for="hf-email">Nama Pasien</label>
+							<div class="col-md-4">
+								<select class="form-control" id="nama_pasien" name="nama_pasien" style="width: 100%;">
+								@foreach($transaksi->unique('nama_pasien') as $trx)
+									<option value="{{$trx->nama_pasien}}" {{(request()->input("dokter")==$trx->nama_pasien) ? "selected" : ""}}>{{$trx->nama_pasien}}</option>
+								@endforeach
+								</select>
+							</div>
+							<label class="col-md-2 col-form-label" for="hf-email">Poli</label>
+							<div class="col-md-4">
+								<select class="form-control" id="poli" name="poli" style="width: 100%;">
+								@foreach($transaksi->unique('poli') as $trx)
+									<option value="{{$trx->poli}}" {{(request()->input("dokter")==$trx->poli) ? "selected" : ""}}>{{$trx->poli}}</option>
+								@endforeach
+								</select>
+							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-6">

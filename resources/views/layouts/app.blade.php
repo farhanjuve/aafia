@@ -12,6 +12,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 	<script src="https://kit.fontawesome.com/4f5fb3f187.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
 	
 	<!-- Swal -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
@@ -23,9 +26,12 @@
 
     <!-- Styles -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
+
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 	
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <script type="text/javascript">
 		  // Wait for the DOM to be ready
 		function printDiv(divName) {
@@ -91,6 +97,56 @@
 			$('.js-example-basic-single').select2();
 
 		});
+		
+		$(function() {
+			// Initialize form validation on the registration form.
+			// It has the name attribute "registration"
+
+			jQuery.validator.addMethod("specialChars", function( value, element ) {
+				var regex = new RegExp("^[A-Za-z0-9_.]+$");
+				var key = value;
+
+				if (!regex.test(key)) {
+				   return false;
+				}
+				return true;
+			}, "please use only alphanumeric or alphabetic characters");
+
+			$("form[name='contact_form']").validate({
+			  // Specify validation rules
+			  rules: {
+				// The key name on the left side is the name attribute
+				// of an input field. Validation rules are defined
+				// on the right side 
+				telepon: "required",
+			  },
+			  // Specify validation error messages
+			  messages: { 
+				telepon: "Nomor telepon minimal 10 hingga 16 karakter"
+			  },
+			  errorPlacement: function (error, element) {
+				  $(element).closest('.form-group').find('.error-msg').text(error.text());
+			  },
+			  // Make sure the form is submitted to the destination defined
+			  // in the "action" attribute of the form when valid
+			  submitHandler: function(form) { 
+				form.submit();
+			  }
+			  
+			});
+
+			@if (strpos(request()->header('User-Agent'), 'Chrome') === false) 
+			  $( "input[type=date]" ).datepicker({
+				changeMonth: true,
+				changeYear: true
+			  });
+			  $( "input[type=date]" ).on( "change", function() {
+				$( "input[type=date]" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+			  }); 
+
+			@endif
+			
+		});
 		$(function() {
 			var i = 0;
 			var input = document.getElementById("userinput");
@@ -122,7 +178,22 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+@php
+$url = url('/');
+if(Auth::user()){
+switch (Auth::user()->kode) {
+    case "kasir":
+        $url = route('RegisTransaksi');
+        break;
+	case "Dokter":
+        $url = route('DokterTransaksi');
+        break;
+    default:
+        $url = url('/');
+}
+}
+@endphp
+                <a class="navbar-brand" href="{{ $url }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

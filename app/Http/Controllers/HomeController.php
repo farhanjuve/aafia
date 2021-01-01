@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pasien;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Session;
+
 
 class HomeController extends Controller
 {
@@ -67,6 +70,7 @@ class HomeController extends Controller
     }
 	
 	public function dataKaryawan(){
+		$data['kode'] = Auth::user()->kode;
 		$karyawan = DB::table('users')
 			   ->where('kode', '<>', 'dokter')
 			   ->get();
@@ -75,11 +79,59 @@ class HomeController extends Controller
 	}
 	
 	public function dataDokter(){
+		$data['kode'] = Auth::user()->kode;
 		$dokter = DB::table('users')
 				->where('kode', 'dokter')
 				->get();
 		$data['dokter'] = $dokter;
         return view('vDataDokter', $data);
+	}
+	
+	public function hapusKaryawanDokter($id){
+		try{
+            $data = array();
+            
+			$role = DB::table('users')
+			   ->where('id', $id)
+			   ->first();
+			//return $role->kode;
+            $karyawan = User::find($id);
+            $karyawan->delete();
+
+            $data["status"] = "success";
+            $data["role"] = $role->kode;
+            $data["message"] = "Success delete " .$karyawan->name;
+			$data['kode'] = Auth::user()->kode;
+
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            $data["status"] = "error";
+            $data["message"] = "Error delete ";
+        }
+
+        if ($data["status"] == "success") {
+			if ($data["role"] == "Dokter") {
+				$dokter = DB::table('users')
+					->where('kode', 'dokter')
+					->get();
+				$data['dokter'] = $dokter;
+				return view('vDataDokter', $data);
+			} else {
+            //return \Redirect::route('RegisPasien')->with(['success' => $data["message"]]);
+				$karyawan = DB::table('users')
+				   ->where('kode', '<>', 'dokter')
+				   ->get();
+				$data['karyawan'] = $karyawan;
+				return view('vDataKaryawan', $data);
+			}
+        }
+        else{
+			$pasien = DB::table('pasien_tbl')
+			   ->get();
+			$data['pasien'] = $pasien;
+			return view('vDataPasien', $data);
+            //return \Redirect::route('RegisPasien')->with(['error' => $data["message"]]);
+        }
 	}
 	
 	public function dataPasien(){
@@ -100,6 +152,16 @@ class HomeController extends Controller
 		
 		if($request->dokter){
 			$transaksi->where('nama_dokter', $request->dokter);
+			//return $transaksi;
+		}
+		
+		if($request->pasien){
+			$transaksi->where('nama_pasien', $request->pasien);
+			//return $transaksi;
+		}
+
+		if($request->poli){
+			$transaksi->where('poli', $request->poli);
 			//return $transaksi;
 		}
 		

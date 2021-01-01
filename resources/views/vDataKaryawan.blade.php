@@ -188,6 +188,9 @@
                     <th>Role</th>
                     <th>Nomor Telepon</th>
                     <th>Tanggal Pendaftaran</th>
+					@if($kode == "super-admin")
+                    <th>Hapus</th>	
+					@endif
                   </tr>
                   </thead>
                   <tbody>
@@ -198,6 +201,15 @@
 						<td>{{$data->kode}}</td>
 						<td>{{$data->telp}}</td>
 						<td>{{$data->created_at}}</td>
+					@if($kode == "super-admin")
+						<td style="text-align:center">
+							<form class="{{ $data->id }}" action="{{ route('hapus-karyawan-dokter', ['id' => $data->id]) }}" method="post">
+                                   @csrf
+                                   @method('DELETE')
+								<a><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
+							</form>
+						</td>
+					@endif
 					</tr>
 					@endforeach
                   </tbody>
@@ -208,6 +220,9 @@
                     <th>Role</th>
                     <th>Nomor Telepon</th>
                     <th>Tanggal Pendaftaran</th>
+					@if($kode == "super-admin")
+                    <th>Hapus</th>
+					@endif
                   </tr>
                   </tfoot>
                 </table>

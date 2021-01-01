@@ -44,7 +44,11 @@ Route::get('/datatransaksi', [HomeController::class, 'dataTransaksi'])->name('dt
 Route::post('/datatransaksi', [HomeController::class, 'dataTransaksi'])->name('dttrx-filter');
 
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('home');
+
 Route::get('/RegisPasien', [HomeController::class, 'RegisPasien'])->name('RegisPasien');
+Route::get('/editPasien/{id}', [PasienController::class, 'editPasien'])->name('editPasien');
+Route::post('/editPasien/{id}', [PasienController::class, 'editPasien'])->name('editPasien-post');
+
 Route::get('/RegisTransaksi', [TransactionController::class, 'index'])->name('RegisTransaksi');
 Route::get('/DokterTransaksi', [TransactionController::class, 'dokter'])->name('DokterTransaksi');
 Route::get('/TindakanTransaksi/', [TransactionController::class, 'tindakan']);
@@ -53,3 +57,5 @@ Route::get('/Kasir/{created_at}', [TransactionController::class, 'kasirBayar'])-
 Route::post('/BayarTransaksi', [TransactionController::class, 'bayar'])->name('BayarTransaksi');
 Route::post('/RegisTransaksi', [TransactionController::class, 'index'])->name('Registernew');
 Route::delete('delete/pasien/{id}', [PasienController::class, 'hapusPasien'])->name('hapus-pasien');
+Route::delete('/datakaryawan/{id}', [HomeController::class, 'hapusKaryawanDokter'])->name('hapus-karyawan-dokter');
+Route::delete('/RegisTransaksi/{id}', [TransactionController::class, 'hapusTransaksi'])->name('transaction-destroy');

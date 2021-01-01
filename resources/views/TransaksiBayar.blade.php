@@ -1167,7 +1167,7 @@ label.arrowed,
 							<div class="col-sm-5 pull-right">
 								<h4 class="pull-right">
 									Total harga :
-									<span class="red">Rp {{$data['hargatotal']}}</span>
+									<span class="red">{{ 'Rp '.number_format($data['hargatotal'],2,',','.')}}</span>									
 								</h4>
 							</div>
 						</div>

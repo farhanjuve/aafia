@@ -8,6 +8,8 @@ use App\Models\Pasien;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 use Session;
 
 
@@ -85,6 +87,34 @@ class HomeController extends Controller
 				->get();
 		$data['dokter'] = $dokter;
         return view('vDataDokter', $data);
+	}
+	
+	public function tambahKaryawan(Request $request){
+		//$newUser = new User();
+		//return $request;
+		if($request->password_confirmation){
+			try{
+				User::create([
+					'name' => $request->name,
+					'email' => $request->email,
+					'password' => Hash::make($request->password),
+					'kode' => $request->kode ?? "Dokter",
+					'lp' => $request->lp,
+					'alamat' => $request->alamat ?? null,
+					'telp' => $request->telp ?? null,
+					'gigi_umum' => $request->gigi_umum ?? null,
+				]);
+				Session::put('message', 'Karyawan/Dokter berhasil di daftarkan, silahkan cek');
+				return view('SuccessPage');
+				//return \Redirect::route('home');
+			}
+			catch(\Illuminate\Database\QueryException $e){
+				Session::put('message', 'Gagal, mohon coba kembali');
+				return view('errorPage');
+				//return \Redirect::route('home');
+			}			
+		}
+		return view('/auth/register');		
 	}
 	
 	public function hapusKaryawanDokter($id){

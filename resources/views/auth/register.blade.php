@@ -21,7 +21,7 @@
 						</ul>
 						<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-								<form method="POST" action="{{ route('register') }}">
+								<form method="POST" action="{{ route('tambahKaryawan') }}">
 								@csrf
 								<h3 class="register-heading">Non Dokter</h3>
 								<div class="row register-form">
@@ -84,7 +84,7 @@
 								</form>
 							</div>
 							<div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-								<form method="POST" action="{{ route('daftarDokter') }}">
+								<form method="POST" action="{{ route('tambahKaryawan') }}">
 								@csrf
 								<h3 class="register-heading">Dokter</h3>
 								<div class="row register-form">

@@ -133,6 +133,12 @@
             </ul>
           </li>
 		  <li class="nav-item">
+			<a href="{{ url('/tambahkaryawan') }}" class="nav-link">
+				  <i class="ion ion-person-add"></i>
+			  <p>Tambah Dokter/Karyawan</p>
+			</a>
+          </li>
+		  <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
 			   onclick="event.preventDefault();
 							 document.getElementById('logout-form').submit();">

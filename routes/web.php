@@ -42,6 +42,8 @@ Route::get('/datapasien', [HomeController::class, 'dataPasien'])->name('dtpas');
 Route::get('/datadokter', [HomeController::class, 'dataDokter'])->name('dtdok');
 Route::get('/datatransaksi', [HomeController::class, 'dataTransaksi'])->name('dttrx');
 Route::post('/datatransaksi', [HomeController::class, 'dataTransaksi'])->name('dttrx-filter');
+Route::get('/tambahkaryawan', [HomeController::class, 'tambahKaryawan']);
+Route::post('/tambahkaryawan', [HomeController::class, 'tambahKaryawan'])->name('tambahKaryawan');
 
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('home');
 

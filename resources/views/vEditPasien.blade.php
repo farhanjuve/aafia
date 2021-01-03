@@ -36,11 +36,11 @@
 							@csrf>
 						  <div class="form-group">
 							<label>Nama Pasien</label>
-							<input type="text" class="form-control" readonly placeholder="{{ $user->name }}" >
+							<input type="text" class="form-control" readonly value="{{ $user->name }}" >
 						  </div>
 						  <div class="form-group">
 							<label>NIK</label>
-							<input type="text" name="nik" class="form-control" placeholder="{{ $user->nik }}">
+							<input type="text" name="nik" class="form-control" value="{{ $user->nik }}">
 						  </div>
 						  <button type="submit" class="btn btn-primary" value="submit">Submit</button>
 						</form>

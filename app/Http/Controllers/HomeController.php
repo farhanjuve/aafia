@@ -166,8 +166,10 @@ class HomeController extends Controller
 	
 	public function dataPasien(){
 		$pasien = DB::table('pasien_tbl')
-			   ->get();
+				->where('nik', '<>', NULL)
+				->get();
 		$data['pasien'] = $pasien;
+		Session()->forget('message');
         return view('vDataPasien', $data);
 	}
 	
@@ -283,8 +285,10 @@ class HomeController extends Controller
         //return redirect()->route('daftarPasien');
 		//return route('daftarPasien');
 		$data = array();
+		//$id = Pasien::where('nik', NULL)->first();
+		//return $id->no_rm;
 		
-		$passien = DB::table('pasien_tbl')->get();
+		$passien = DB::table('pasien_tbl')->where('nik', '<>', NULL)->get();
 		$data['pasien'] = $passien;
 		return view('PasienRegister', $data);
     }

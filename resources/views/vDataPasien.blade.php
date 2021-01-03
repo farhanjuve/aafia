@@ -175,7 +175,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-			@if ($message = Session::get('success'))
+			@if ($message = Session::get('message'))
 				<div class="alert alert-success alert-block" style="margin-top:1.5rem">
 					<button type:button class="close" data-dismiss="alert">x</button>
 					<strong>{{ $message }}</strong>

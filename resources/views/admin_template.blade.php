@@ -258,20 +258,22 @@
 					<table class="table table-striped">
 					  <thead>
 						<tr>
-						  <th style="width: 10px">#</th>
+						  <th style="width: 10px">No</th>
 						  <th>Nomor Transaksi</th>
 						  <th>Nama Pasien</th>
 						  <th>Status</th>
 						</tr>
 					  </thead>
 					  <tbody>
+					  <?php $i=0 ?>
 						@foreach($today as $key => $data)
 						<tr>
-							<td>{{ $key+1 }}</td>
+							<td>{{ $i+1 }}</td>
 							<td>{{$data->nomor_transaksi}}</td>
 							<td>{{$data->nama_pasien}}</td>
 							<td>{{$data->status}}</td>
 						</tr>
+						<?php $i++; ?>
 						@endforeach
 					  </tbody>
 					</table>

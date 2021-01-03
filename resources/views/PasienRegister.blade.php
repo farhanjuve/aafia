@@ -10,7 +10,7 @@ h5.ex1 {
 	<div class="animate fadeIn">
         <div class="row justify-content-center" style="margin-top:20px;">
             <div class="col-sm-12">
-                @if ($message = Session::get('success'))
+                @if ($message = Session::get('message'))
                     <div class="alert alert-success alert-block" style="margin-top:1.5rem">
                         <button type:button class="close" data-dismiss="alert">x</button>
                         <strong>{{ $message }}</strong>
@@ -32,12 +32,8 @@ h5.ex1 {
                             <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-											<input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="" required autofocus placeholder="Nama lengkap *">
-											@error('name')
-												<span class="invalid-feedback" role="alert">
-													<strong>Nama diisi</strong>
-												</span>
-											@enderror
+											<input type="text" class="form-control" id="name" name="name" value="{{ $user->name ?? "" }}" required autofocus placeholder="Nama lengkap *">
+											
                                         </div>
                                         <div class="form-group">
                                             <input id="nik" name="nik" type="number" class="form-control" placeholder="NIK*" value="" required>
@@ -47,11 +43,11 @@ h5.ex1 {
                                             <div class="maxl">
                                                 <label class="radio inline"> 
                                                     <input type="radio" name="gender" value="Laki-laki" checked="">
-                                                    <span> Male </span> 
+                                                    <span> Laki-laki </span> 
                                                 </label>
                                                 <label class="radio inline"> 
                                                     <input type="radio" name="gender" value="Perempuan">
-                                                    <span>Female </span> 
+                                                    <span> Perempuan </span> 
                                                 </label>
                                             </div>
                                         </div>
@@ -100,7 +96,7 @@ h5.ex1 {
 										<div class="col-sm-12 error-msg" style="margin-left: 15px;"></div>  
 
                                         <div class="form-group">
-                                            <input id="pekerjaan" name="pekerjaan" type="text" class="form-control" placeholder="Pekerjaan*" value="">
+                                            <input id="pekerjaan" name="pekerjaan" type="text" class="form-control" placeholder="Pekerjaan" value="">
                                         </div>
 										<div class="form-group">
 											<i>Status pernikahan</i>
@@ -128,11 +124,23 @@ h5.ex1 {
                                                 </label>
                                                 <label class="radio inline"> 
                                                     <input type="radio" name="agama" value="kristen">
-                                                    <span> Kristen </span> 
+                                                    <span> Kristen Protestan </span> 
+                                                </label>
+												<label class="radio inline"> 
+                                                    <input type="radio" name="agama" value="katolik">
+                                                    <span> Katolik </span> 
                                                 </label>
 												<label class="radio inline"> 
                                                     <input type="radio" name="agama" value="hindu">
                                                     <span> Hindu </span> 
+                                                </label>
+												<label class="radio inline"> 
+                                                    <input type="radio" name="agama" value="buddha">
+                                                    <span> Buddha </span> 
+                                                </label>
+												<label class="radio inline"> 
+                                                    <input type="radio" name="agama" value="khonghucu">
+                                                    <span> Khonghucu </span> 
                                                 </label>
 												
                                             </div>

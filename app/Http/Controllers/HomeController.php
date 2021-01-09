@@ -61,7 +61,7 @@ class HomeController extends Controller
 			   ->unique('nomor_transaksi');
 		$pasien = DB::table('pasien_tbl')
 			   ->get()
-			   ->unique('no_rm');
+			   ->unique('name');
 		$data['total'] = count($cek);
 		$data['today'] = $today;
 		$data['jml_pasien'] = count($pasien);

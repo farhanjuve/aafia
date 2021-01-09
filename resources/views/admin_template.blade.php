@@ -132,12 +132,14 @@
               </li>
             </ul>
           </li>
+		  @if(Auth::user()->kode == "super-admin" )
 		  <li class="nav-item">
 			<a href="{{ url('/tambahkaryawan') }}" class="nav-link">
 				  <i class="ion ion-person-add"></i>
 			  <p>Tambah Dokter/Karyawan</p>
 			</a>
           </li>
+		  @endif
 		  <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
 			   onclick="event.preventDefault();
@@ -187,12 +189,11 @@
               <div class="inner">
                 <h3>{{ count($today) }}</h3>
 
-                <p>Transaksi Harian</p>
+                <p>Transaksi Hari Ini</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -207,7 +208,7 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a  class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+              <a class="small-box-footer" href="{{ route('dttrx') }}"><i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -222,7 +223,7 @@
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a  class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+              <a  class="small-box-footer" href="{{ route('dtpas') }}"><i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -237,7 +238,6 @@
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-			  <a  class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -291,21 +291,7 @@
           <section class="col-lg-5 connectedSortable">
 
 			<!-- Calendar -->
-			<div class="card bg-gradient-success">
-              <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
 
-                <h3 class="card-title">
-                  <i class="far fa-calendar-alt"></i>
-                  Calendar
-                </h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body pt-0">
-                <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
-              </div>
-              <!-- /.card-body -->
-            </div>
             <!-- /.card -->
           </section>
           <!-- right col -->

@@ -116,6 +116,8 @@
 								<form class="form-inline">
                                 
 								<input style="margin-top:1.5rem" name="harga" type="number" class="form-control" placeholder="Harga (dalam rupiah)">
+								<input name="no_transaksi" type="hidden" value="{{$data['no_transaksi']}}">
+
 								<button type="submit" class="btn btn-primary">
                                     {{ __('Kirim ke Kasir') }}
                                 </button>

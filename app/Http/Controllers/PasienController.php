@@ -123,7 +123,8 @@ class PasienController extends Controller
 			$message = 'Sukses ganti NIK';
 			$data['message'] = $message;
 			$pasien = DB::table('pasien_tbl')
-			   ->get();
+				->where('nik', '<>', NULL)
+				->get();
 			$data['pasien'] = $pasien;
 			Session::put('message', 'Pasien berhasil di edit, silahkan cek');
 

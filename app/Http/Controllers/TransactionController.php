@@ -186,6 +186,25 @@ class TransactionController extends Controller
 					$newTransaction->save();
 				}
 			}
+			//return $hargatotal;
+			$cek2 = Transaction::where('nomor_transaksi', $request->no_transaksi)
+					->get();
+					
+			foreach($cek2 as $saving){
+				$saving->status = "Menunggu Pembayaran"; 
+				$saving->harga = $request->harga ?? $hargatotal; 
+				$saving->save(); 
+			}
+			/*
+			if($request->cancel){
+				$cek = Transaction::where('status', "Mencari Dokter")
+					->where('created_at', $created_at)
+					->get();
+			}
+			*/
+			
+			//return $data['tindakan'];
+			return \Redirect::route('DokterTransaksi')->with(['success' => $data["message"]]);
 		} else {
 			Session::put('message', 'Tindakan belum diisi, silahkan ');
 			$data = Session::all();
@@ -193,25 +212,7 @@ class TransactionController extends Controller
 			return view('ErrorPage');
 			//return view('ErrorPage')->with(session(['success' => $data["message"]]));
 		}
-		//return $hargatotal;
-		$cek2 = Transaction::where('nomor_transaksi', $request->no_transaksi)
-				->get();
-				
-		foreach($cek2 as $saving){
-			$saving->status = "Menunggu Pembayaran"; 
-			$saving->harga = $request->harga ?? $hargatotal; 
-			$saving->save(); 
-		}
-		/*
-		if($request->cancel){
-			$cek = Transaction::where('status', "Mencari Dokter")
-				->where('created_at', $created_at)
-				->get();
-		}
-		*/
-		
-		//return $data['tindakan'];
-		return \Redirect::route('DokterTransaksi')->with(['success' => $data["message"]]);
+
 	}
 	
 	public function kasirBayar($created_at){
